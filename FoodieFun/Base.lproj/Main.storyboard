@@ -23,10 +23,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="4fR-PY-p9V">
-                                <rect key="frame" x="20" y="686" width="374" height="116"/>
+                                <rect key="frame" x="40" y="686" width="334" height="116"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVE-9q-zuF">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
                                         <color key="backgroundColor" red="0.90588235294117647" green="0.43529411764705883" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="ysY-1q-Gth"/>
@@ -39,7 +39,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fIf-6Q-AJi">
-                                        <rect key="frame" x="0.0" y="66" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="66" width="334" height="50"/>
                                         <state key="normal" title="Login">
                                             <color key="titleColor" red="0.90588235289999997" green="0.43529411759999997" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -53,16 +53,16 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="4eO-jq-0ss">
-                                <rect key="frame" x="16" y="175" width="382" height="116.5"/>
+                                <rect key="frame" x="40" y="170" width="334" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start recording your experiences with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9nr-9Y-BFJ">
-                                        <rect key="frame" x="47.5" y="0.0" width="287" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="6" y="0.0" width="322" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="4US-X7-ZcW">
-                                        <rect key="frame" x="0.0" y="36.5" width="382" height="80"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="4US-X7-ZcW">
+                                        <rect key="frame" x="0.0" y="40" width="334" height="80.000000000000114"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="34b-5V-D8b"/>
                                         </constraints>
@@ -72,24 +72,28 @@
                                     <constraint firstAttribute="trailing" secondItem="4US-X7-ZcW" secondAttribute="trailing" id="jNq-Lu-PtX"/>
                                 </constraints>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="UR4-uH-a5q">
-                                <rect key="frame" x="16" y="60" width="137" height="35"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="UR4-uH-a5q">
+                                <rect key="frame" x="16" y="60" width="120" height="30.000000000000114"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="kLw-j8-few"/>
+                                    <constraint firstAttribute="width" secondItem="UR4-uH-a5q" secondAttribute="height" multiplier="667:167" id="plj-si-y5K"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4fR-PY-p9V" secondAttribute="trailing" constant="20" id="4NA-Fe-kjf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4fR-PY-p9V" secondAttribute="trailing" constant="40" id="4NA-Fe-kjf"/>
                             <constraint firstItem="4eO-jq-0ss" firstAttribute="top" secondItem="UR4-uH-a5q" secondAttribute="bottom" constant="80" id="5FG-Aq-7jo"/>
                             <constraint firstItem="Rhu-w4-T9Y" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="EYE-Zj-fBR"/>
-                            <constraint firstItem="4fR-PY-p9V" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Ekr-DI-Yds"/>
+                            <constraint firstItem="4fR-PY-p9V" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="Ekr-DI-Yds"/>
                             <constraint firstItem="LNs-5u-G2a" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="G04-a3-Xnu"/>
                             <constraint firstItem="Rhu-w4-T9Y" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="J9E-Yd-2Kj"/>
                             <constraint firstItem="LNs-5u-G2a" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NPA-Rz-q5s"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4eO-jq-0ss" secondAttribute="trailing" constant="16" id="Ubg-Xe-lyI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4eO-jq-0ss" secondAttribute="trailing" constant="40" id="Ubg-Xe-lyI"/>
                             <constraint firstItem="LNs-5u-G2a" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XB9-5L-igh"/>
                             <constraint firstItem="UR4-uH-a5q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="adx-ME-f7o"/>
                             <constraint firstAttribute="bottom" secondItem="Rhu-w4-T9Y" secondAttribute="bottom" id="eFN-Lr-v6V"/>
-                            <constraint firstItem="4eO-jq-0ss" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="eNs-L3-Doc"/>
+                            <constraint firstItem="4eO-jq-0ss" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="eNs-L3-Doc"/>
                             <constraint firstItem="UR4-uH-a5q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="izs-Hs-n9D"/>
                             <constraint firstItem="Rhu-w4-T9Y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kbF-2P-zoN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4fR-PY-p9V" secondAttribute="bottom" constant="60" id="mIh-lk-1Ak"/>
@@ -182,6 +186,9 @@
                                 <state key="normal" title="Sign In">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <segue destination="EKv-gz-KQk" kind="show" id="420-Lc-imy"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="bWp-lC-1yi">
                                 <rect key="frame" x="79" y="600.5" width="256" height="30"/>
@@ -219,7 +226,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mdf-a8-ia6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2605.7971014492755" y="483.48214285714283"/>
+            <point key="canvasLocation" x="1845" y="525"/>
         </scene>
         <!--Experiences Table View Controller-->
         <scene sceneID="k66-yL-M0Z">
@@ -264,7 +271,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Star" translatesAutoresizingMaskIntoConstraints="NO" id="Tbx-2S-RT4">
-                                            <rect key="frame" x="367" y="83" width="27" height="26"/>
+                                            <rect key="frame" x="367" y="83" width="27" height="37"/>
                                         </imageView>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="tu1-qb-3Vt">
                                             <rect key="frame" x="334" y="11" width="60" height="60"/>
@@ -283,6 +290,7 @@
                                         <constraint firstItem="Iwl-aj-8Nr" firstAttribute="leading" secondItem="4Od-fX-d6v" secondAttribute="leadingMargin" id="Tpm-Ct-2MQ"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Tbx-2S-RT4" secondAttribute="trailing" id="W9q-5h-RdV"/>
                                         <constraint firstAttribute="trailing" secondItem="nZa-VV-ANJ" secondAttribute="trailing" id="gYo-G8-ZkB"/>
+                                        <constraint firstAttribute="bottom" secondItem="Tbx-2S-RT4" secondAttribute="bottom" id="iS0-mY-7EV"/>
                                         <constraint firstItem="tu1-qb-3Vt" firstAttribute="trailing" secondItem="4Od-fX-d6v" secondAttribute="trailingMargin" id="im5-NF-gDt"/>
                                         <constraint firstItem="R8Y-An-35z" firstAttribute="leading" secondItem="4Od-fX-d6v" secondAttribute="leadingMargin" id="kUF-rk-STG"/>
                                         <constraint firstItem="nZa-VV-ANJ" firstAttribute="top" secondItem="4Od-fX-d6v" secondAttribute="top" id="sNe-rV-cLH"/>
@@ -306,7 +314,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1l5-jS-fGt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7133.3333333333339" y="407.8125"/>
+            <point key="canvasLocation" x="4309" y="224"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="XCO-V1-zhf">
@@ -407,7 +415,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G2g-pW-fbh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5313.04347826087" y="-252.45535714285714"/>
+            <point key="canvasLocation" x="4309" y="-461"/>
         </scene>
         <!--Add Experience View Controller-->
         <scene sceneID="aXj-FD-Noz">
@@ -534,7 +542,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5kk-sE-eRZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8675.36231884058" y="-53.571428571428569"/>
+            <point key="canvasLocation" x="5720" y="-118"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="lir-wF-WRB">
@@ -712,7 +720,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0lo-GW-vOh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2615.9420289855075" y="-211.60714285714286"/>
+            <point key="canvasLocation" x="1855" y="-170"/>
         </scene>
         <!--Item-->
         <scene sceneID="Pk6-B3-QbR">
@@ -731,7 +739,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iTf-gV-w8c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6407.2463768115949" y="407.8125"/>
+            <point key="canvasLocation" x="3583" y="224"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="PWR-ei-KgE">
@@ -750,7 +758,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h2p-w6-Mbl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5686.9565217391309" y="407.8125"/>
+            <point key="canvasLocation" x="2861" y="224"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="5AB-vF-Umk">
@@ -815,9 +823,12 @@
         <image name="camera.fill" catalog="system" width="64" height="48"/>
         <image name="fishBG" width="6000" height="4000"/>
         <image name="hummusBG" width="3840" height="5760"/>
-        <image name="logo" width="137" height="35"/>
+        <image name="logoWhite" width="2001" height="501"/>
         <image name="magnifyingglass" catalog="system" width="64" height="60"/>
         <image name="plus" catalog="system" width="64" height="58"/>
         <image name="profile" width="264" height="264"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="420-Lc-imy"/>
+    </inferredMetricsTieBreakers>
 </document>

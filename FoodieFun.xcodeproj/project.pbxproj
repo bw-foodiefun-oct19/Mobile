@@ -13,6 +13,8 @@
 		0B7BB5832357EBCB00B8958B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B7BB5812357EBCB00B8958B /* Main.storyboard */; };
 		0B7BB5852357EBCC00B8958B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B7BB5842357EBCC00B8958B /* Assets.xcassets */; };
 		0B7BB5882357EBCC00B8958B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B7BB5862357EBCC00B8958B /* LaunchScreen.storyboard */; };
+		2972526323581D71005094E0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972526223581D71005094E0 /* User.swift */; };
+		2972526523581D9A005094E0 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2972526423581D9A005094E0 /* Meal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		0B7BB5842357EBCC00B8958B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0B7BB5872357EBCC00B8958B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0B7BB5892357EBCC00B8958B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2972526223581D71005094E0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		2972526423581D9A005094E0 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 		0B7BB57A2357EBCB00B8958B /* FoodieFun */ = {
 			isa = PBXGroup;
 			children = (
+				2972526123581D61005094E0 /* Models */,
 				0B7BB57B2357EBCB00B8958B /* AppDelegate.swift */,
 				0B7BB57D2357EBCB00B8958B /* SceneDelegate.swift */,
 				0B7BB57F2357EBCB00B8958B /* ViewController.swift */,
@@ -65,6 +70,15 @@
 				0B7BB5892357EBCC00B8958B /* Info.plist */,
 			);
 			path = FoodieFun;
+			sourceTree = "<group>";
+		};
+		2972526123581D61005094E0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2972526223581D71005094E0 /* User.swift */,
+				2972526423581D9A005094E0 /* Meal.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +152,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2972526523581D9A005094E0 /* Meal.swift in Sources */,
+				2972526323581D71005094E0 /* User.swift in Sources */,
 				0B7BB5802357EBCB00B8958B /* ViewController.swift in Sources */,
 				0B7BB57C2357EBCB00B8958B /* AppDelegate.swift in Sources */,
 				0B7BB57E2357EBCB00B8958B /* SceneDelegate.swift in Sources */,

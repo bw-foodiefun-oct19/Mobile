@@ -12,8 +12,9 @@ class SignInViewController: UIViewController {
     
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
-    
 
+    let apiController = APIController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,7 +22,25 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
+        guard let username = emailTextField.text,
+            let password = passwordTextField.text,
+            !username.isEmpty,
+            !password.isEmpty else { return }
         
+        let user = User(username: username, password: password)
+        signIn(with: user)
+    }
+    
+    func signIn(with user: User) {
+        apiController.signIn(with: user) { (error) in
+            if let error = error {
+                print("Error occurred during sign in: \(error)")
+            } else {
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
     }
     
     /*

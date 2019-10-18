@@ -18,6 +18,7 @@
 		29CB636C23596823003D56DC /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CB636B23596823003D56DC /* APIController.swift */; };
 		29CB636E235968BA003D56DC /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CB636D235968BA003D56DC /* Token.swift */; };
 		CCA5759B235A169C004F17BA /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5759A235A169C004F17BA /* SignInViewController.swift */; };
+		CCA5759D235A1A1E004F17BA /* ExperiencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5759C235A1A1E004F17BA /* ExperiencesTableViewController.swift */; };
 		CE5CFF1823581C4100DBF1BA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CFF1723581C4000DBF1BA /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		29CB636B23596823003D56DC /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		29CB636D235968BA003D56DC /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		CCA5759A235A169C004F17BA /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		CCA5759C235A1A1E004F17BA /* ExperiencesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperiencesTableViewController.swift; sourceTree = "<group>"; };
 		CE5CFF1723581C4000DBF1BA /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +107,7 @@
 				CE5CFF1723581C4000DBF1BA /* SearchViewController.swift */,
 				29CB6368235967C6003D56DC /* SignUpViewController.swift */,
 				CCA5759A235A169C004F17BA /* SignInViewController.swift */,
+				CCA5759C235A1A1E004F17BA /* ExperiencesTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				29CB6367235964B3003D56DC /* Experience.swift in Sources */,
 				0B7BB57E2357EBCB00B8958B /* SceneDelegate.swift in Sources */,
 				29CB636E235968BA003D56DC /* Token.swift in Sources */,
+				CCA5759D235A1A1E004F17BA /* ExperiencesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

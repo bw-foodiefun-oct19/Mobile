@@ -17,6 +17,7 @@
 		29CB6369235967C6003D56DC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CB6368235967C6003D56DC /* SignUpViewController.swift */; };
 		29CB636C23596823003D56DC /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CB636B23596823003D56DC /* APIController.swift */; };
 		29CB636E235968BA003D56DC /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CB636D235968BA003D56DC /* Token.swift */; };
+		CCA5759B235A169C004F17BA /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5759A235A169C004F17BA /* SignInViewController.swift */; };
 		CE5CFF1823581C4100DBF1BA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CFF1723581C4000DBF1BA /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		29CB6368235967C6003D56DC /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		29CB636B23596823003D56DC /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		29CB636D235968BA003D56DC /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		CCA5759A235A169C004F17BA /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		CE5CFF1723581C4000DBF1BA /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 			children = (
 				CE5CFF1723581C4000DBF1BA /* SearchViewController.swift */,
 				29CB6368235967C6003D56DC /* SignUpViewController.swift */,
+				CCA5759A235A169C004F17BA /* SignInViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				29CB63652359648B003D56DC /* User.swift in Sources */,
 				CE5CFF1823581C4100DBF1BA /* SearchViewController.swift in Sources */,
 				0B7BB57C2357EBCB00B8958B /* AppDelegate.swift in Sources */,
+				CCA5759B235A169C004F17BA /* SignInViewController.swift in Sources */,
 				29CB6367235964B3003D56DC /* Experience.swift in Sources */,
 				0B7BB57E2357EBCB00B8958B /* SceneDelegate.swift in Sources */,
 				29CB636E235968BA003D56DC /* Token.swift in Sources */,

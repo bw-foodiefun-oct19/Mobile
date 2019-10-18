@@ -98,7 +98,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="4US-X7-ZcW">
-                                        <rect key="frame" x="0.0" y="40" width="334" height="80"/>
+                                        <rect key="frame" x="0.0" y="40" width="334" height="80.000000000000114"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="34b-5V-D8b"/>
                                         </constraints>
@@ -461,7 +461,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="lir-wF-WRB">
             <objects>
-                <viewController title="Sign Up View Controller" id="yrT-7b-UNd" sceneMemberID="viewController">
+                <viewController title="Sign Up View Controller" id="yrT-7b-UNd" customClass="SignUpViewController" customModule="FoodieFun" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PD7-Bm-Q9C">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -578,6 +578,9 @@
                                 <state key="normal" title="Become a Foodie!">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="signUpButtonTapped:" destination="yrT-7b-UNd" eventType="touchUpInside" id="Yy2-Dp-L7Q"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sAt-5w-Rsm">
                                 <rect key="frame" x="40" y="501.5" width="334" height="30"/>
@@ -612,6 +615,13 @@
                         <viewLayoutGuide key="safeArea" id="mmT-qr-86d"/>
                     </view>
                     <navigationItem key="navigationItem" title="FoodieFun" id="vb7-Rg-i6R"/>
+                    <connections>
+                        <outlet property="confirmPasswordTextField" destination="lSM-3R-trn" id="g1j-nP-ozY"/>
+                        <outlet property="emailTextField" destination="Pdy-du-beh" id="Df4-tW-3Ch"/>
+                        <outlet property="firstNameTextField" destination="s5P-HM-d85" id="77k-VQ-rsP"/>
+                        <outlet property="lastNameTextField" destination="NjX-ya-OGr" id="oh7-NE-h4O"/>
+                        <outlet property="passwordTextField" destination="dUG-TK-Tvg" id="MKb-vm-zpZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0lo-GW-vOh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

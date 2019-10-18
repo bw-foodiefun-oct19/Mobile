@@ -9,15 +9,19 @@
 import UIKit
 
 class ExperiencesTableViewController: UITableViewController {
+    
+    let apiController = APIController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if apiController.token == nil {
+            performSegue(withIdentifier: "SignInViewModalSegue", sender: self)
+        }
     }
 
     // MARK: - Table view data source
@@ -76,15 +80,16 @@ class ExperiencesTableViewController: UITableViewController {
         return true
     }
     */
-
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "SignInViewModalSegue" {
+            if let signInVC = segue.destination as? SignInViewController {
+                signInVC.apiController = apiController
+            }
+        }
     }
-    */
+    
 
 }

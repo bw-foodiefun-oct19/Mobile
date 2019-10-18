@@ -13,7 +13,7 @@ class SignInViewController: UIViewController {
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
 
-    let apiController = APIController()
+    var apiController: APIController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,7 @@ class SignInViewController: UIViewController {
     }
     
     func signIn(with user: User) {
-        apiController.signIn(with: user) { (error) in
+        apiController?.signIn(with: user) { (error) in
             if let error = error {
                 print("Error occurred during sign in: \(error)")
             } else {

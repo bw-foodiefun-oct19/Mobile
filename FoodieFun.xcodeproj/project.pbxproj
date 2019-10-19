@@ -19,6 +19,9 @@
 		29CB636E235968BA003D56DC /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CB636D235968BA003D56DC /* Token.swift */; };
 		CCA5759B235A169C004F17BA /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5759A235A169C004F17BA /* SignInViewController.swift */; };
 		CCA5759D235A1A1E004F17BA /* ExperiencesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA5759C235A1A1E004F17BA /* ExperiencesTableViewController.swift */; };
+		CCB15A45235B6B18000F3A55 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB15A44235B6B18000F3A55 /* CoreDataStack.swift */; };
+		CCB15A48235B6B5C000F3A55 /* FoodieFun.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCB15A46235B6B5C000F3A55 /* FoodieFun.xcdatamodeld */; };
+		CCB15A4B235B6E0F000F3A55 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB15A4A235B6E0F000F3A55 /* Utilities.swift */; };
 		CE5CFF1823581C4100DBF1BA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CFF1723581C4000DBF1BA /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +40,9 @@
 		29CB636D235968BA003D56DC /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		CCA5759A235A169C004F17BA /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		CCA5759C235A1A1E004F17BA /* ExperiencesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperiencesTableViewController.swift; sourceTree = "<group>"; };
+		CCB15A44235B6B18000F3A55 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		CCB15A47235B6B5C000F3A55 /* FoodieFun.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FoodieFun.xcdatamodel; sourceTree = "<group>"; };
+		CCB15A4A235B6E0F000F3A55 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		CE5CFF1723581C4000DBF1BA /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,6 +76,7 @@
 		0B7BB57A2357EBCB00B8958B /* FoodieFun */ = {
 			isa = PBXGroup;
 			children = (
+				CCB15A49235B6DCA000F3A55 /* Helpers */,
 				29CB636A235967F5003D56DC /* Application */,
 				29CB636323596480003D56DC /* Models */,
 				CE5CFF16235815EC00DBF1BA /* View Controllers */,
@@ -89,6 +96,7 @@
 				29CB63642359648B003D56DC /* User.swift */,
 				29CB6366235964B3003D56DC /* Experience.swift */,
 				29CB636D235968BA003D56DC /* Token.swift */,
+				CCB15A46235B6B5C000F3A55 /* FoodieFun.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -97,8 +105,17 @@
 			isa = PBXGroup;
 			children = (
 				29CB636B23596823003D56DC /* APIController.swift */,
+				CCB15A44235B6B18000F3A55 /* CoreDataStack.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		CCB15A49235B6DCA000F3A55 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CCB15A4A235B6E0F000F3A55 /* Utilities.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		CE5CFF16235815EC00DBF1BA /* View Controllers */ = {
@@ -187,10 +204,13 @@
 				29CB6369235967C6003D56DC /* SignUpViewController.swift in Sources */,
 				29CB63652359648B003D56DC /* User.swift in Sources */,
 				CE5CFF1823581C4100DBF1BA /* SearchViewController.swift in Sources */,
+				CCB15A4B235B6E0F000F3A55 /* Utilities.swift in Sources */,
 				0B7BB57C2357EBCB00B8958B /* AppDelegate.swift in Sources */,
 				CCA5759B235A169C004F17BA /* SignInViewController.swift in Sources */,
+				CCB15A45235B6B18000F3A55 /* CoreDataStack.swift in Sources */,
 				29CB6367235964B3003D56DC /* Experience.swift in Sources */,
 				0B7BB57E2357EBCB00B8958B /* SceneDelegate.swift in Sources */,
+				CCB15A48235B6B5C000F3A55 /* FoodieFun.xcdatamodeld in Sources */,
 				29CB636E235968BA003D56DC /* Token.swift in Sources */,
 				CCA5759D235A1A1E004F17BA /* ExperiencesTableViewController.swift in Sources */,
 			);
@@ -390,6 +410,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CCB15A46235B6B5C000F3A55 /* FoodieFun.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CCB15A47235B6B5C000F3A55 /* FoodieFun.xcdatamodel */,
+			);
+			currentVersion = CCB15A47235B6B5C000F3A55 /* FoodieFun.xcdatamodel */;
+			path = FoodieFun.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0B7BB5702357EBCB00B8958B /* Project object */;
 }

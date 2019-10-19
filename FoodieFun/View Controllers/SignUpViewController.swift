@@ -15,19 +15,43 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
+    @IBOutlet var signUpButton: UIButton!
     
     var apiController = APIController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpElements()
+    }
+    
+    func setUpElements() {
+        Utilities.styleFilledButton(signUpButton)
     }
     
     @IBAction func signUpButtonTapped(_ sender: Any) {
         
         guard let username = emailTextField.text,
             let password = passwordTextField.text,
+            let confirmPassword = confirmPasswordTextField.text,
+            let firstName = firstNameTextField.text,
+            let lastName = lastNameTextField.text,
+            !firstName.isEmpty,
+            !lastName.isEmpty,
             !username.isEmpty,
-            !password.isEmpty else { return }
+            !confirmPassword.isEmpty,
+            !password.isEmpty else {
+                let ac = UIAlertController(title: "Sign Up Failed", message: "Please fill in all the fields before trying to sign up.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(ac, animated: true, completion: nil)
+                return
+        }
+        
+        guard confirmPassword == password else {
+            let ac = UIAlertController(title: "Error", message: "Passwords do not match. Please try again", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(ac, animated: true, completion: nil)
+            return
+        }
         
         let user = User(username: username, password: password)
         
@@ -40,11 +64,9 @@ class SignUpViewController: UIViewController {
             if let error = error {
                 print("Error signing up: \(error)")
             } else {
-                
                 DispatchQueue.main.async {
                     self.dismiss(animated: true, completion: nil)
                 }
-                
             }
         })
     }

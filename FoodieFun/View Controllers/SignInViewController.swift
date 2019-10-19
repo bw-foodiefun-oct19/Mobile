@@ -12,20 +12,31 @@ class SignInViewController: UIViewController {
     
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
-
+    @IBOutlet var loginButton: UIButton!
+    @IBOutlet var signUpButton: UIButton!
+    
     var apiController: APIController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setUpElements()
+    }
+    
+    func setUpElements() {
+        Utilities.styleFilledButton(loginButton)
+        Utilities.styleHollowButton(signUpButton)
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {
         guard let username = emailTextField.text,
             let password = passwordTextField.text,
             !username.isEmpty,
-            !password.isEmpty else { return }
+            !password.isEmpty else {
+                let ac = UIAlertController(title: "Login Failed", message: "Wrong email or password. Please try again.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(ac, animated: true, completion: nil)
+                return
+        }
         
         let user = User(username: username, password: password)
         signIn(with: user)

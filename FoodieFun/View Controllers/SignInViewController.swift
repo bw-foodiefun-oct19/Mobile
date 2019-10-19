@@ -31,7 +31,12 @@ class SignInViewController: UIViewController {
         guard let username = emailTextField.text,
             let password = passwordTextField.text,
             !username.isEmpty,
-            !password.isEmpty else { return }
+            !password.isEmpty else {
+                let ac = UIAlertController(title: "Login Failed", message: "Wrong email or password. Please try again.", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(ac, animated: true, completion: nil)
+                return
+        }
         
         let user = User(username: username, password: password)
         signIn(with: user)

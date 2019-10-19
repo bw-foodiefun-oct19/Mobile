@@ -15,11 +15,17 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
+    @IBOutlet var signUpButton: UIButton!
     
     var apiController = APIController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpElements()
+    }
+    
+    func setUpElements() {
+        Utilities.styleFilledButton(signUpButton)
     }
     
     @IBAction func signUpButtonTapped(_ sender: Any) {

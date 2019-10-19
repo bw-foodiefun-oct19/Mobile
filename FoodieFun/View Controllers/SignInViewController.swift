@@ -12,13 +12,19 @@ class SignInViewController: UIViewController {
     
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
-
+    @IBOutlet var loginButton: UIButton!
+    @IBOutlet var signUpButton: UIButton!
+    
     var apiController: APIController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setUpElements()
+    }
+    
+    func setUpElements() {
+        Utilities.styleFilledButton(loginButton)
+        Utilities.styleHollowButton(signUpButton)
     }
     
     @IBAction func loginButtonTapped(_ sender: Any) {

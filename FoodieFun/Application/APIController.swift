@@ -28,6 +28,9 @@ class APIController {
     private let baseURL = URL(string: "https://backend-foodie-fun.herokuapp.com/api/")!
     var token: Token?
     
+    //for local array from fetching experiences
+    var experiences: [Experience] = []
+    
     //TODO: - fix to use result type instead of just networkError
     func signUp(with user: User, completion: @escaping(Error?) -> Void) {
         
@@ -119,4 +122,50 @@ class APIController {
         }.resume()
     }
     
+    //Creating Experience - POST - requried fields -> item_name
+    func createExperience(for itemName: String, restaurantName: String, restaurantType: String, itemPhoto: String, foodRating: Int, itemComment: String, waitTime: String, dateVisited: Date, completion:@escaping(Error?)->()) {
+    
+        //change id and userID in experience to be optional and id and userID here to be nil
+        let experience = Experience(id: 0, restaurantName: restaurantName, restaurantType: restaurantType, itemName: itemName, itemPhoto: itemPhoto, foodRating: foodRating, itemComment: itemComment, waitTime: waitTime, dateVisited: Date(), userID: 0)
+        
+        //POST
+        let createExperienceURL = self.baseURL.appendingPathComponent("meals")
+        
+        guard let bearer = self.token else {
+            completion(NSError())
+            return
+        }
+        
+        var request = URLRequest(url: createExperienceURL)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(bearer.token, forHTTPHeaderField: "Authorization")
+        
+        let jsonEncoder = JSONEncoder()
+        
+        jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
+        
+        do {
+            let jsonData = try jsonEncoder.encode(experience)
+            request.httpBody = jsonData
+        } catch {
+            NSLog("Error encoding user objects: \(error)")
+            completion(error)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { (_, response, error) in
+            if let response = response as? HTTPURLResponse,
+                response.statusCode != 201 {
+                completion(NSError(domain: "", code: response.statusCode, userInfo: nil))
+                return
+            }
+            if let _ = error {
+                completion(NSError())
+                return
+            }
+            self.experiences.append(experience)
+            completion(nil)
+            }.resume()
+    }
 }

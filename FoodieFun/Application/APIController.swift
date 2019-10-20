@@ -125,10 +125,8 @@ class APIController {
     
     
     
-     
-    
     //FetchingExperience - GET - requried fields -> username, password and token
-           func fetchExperience(completion: @escaping (Error?)-> Void) {
+            func fetchExperiences(completion: @escaping (Error?)-> Void) {
                
                guard let bearer = token else {
                    print("there is no bearer for fetchingMeals")
@@ -235,7 +233,56 @@ class APIController {
             }.resume()
     }
     
-    
+    //Updating experience - PUT - meals/id# for this specifi meal
+        func updateExperience(for experience: Experience, changeitemNameto: String, changerestaurantNameto: String, changerestaurantTypeto: String, changeitemPhototo: String, changefoodRatingto: Int?, changeitemCommentto: String, changewaitTimeto: String, changedateVisitedto: String, completion:@escaping (Error?)->Void) {
+            
+            //making sure passed meal exists in array of allMeals
+            guard let index = self.experiences.firstIndex(of: experience) else {return}
+            self.experiences[index].itemName = changeitemNameto
+    //        self.allMeals[index].restaurantName = changerestaurantNameto!
+    //        self.allMeals[index].restaurantType = changerestaurantTypeto!
+            //add more change update as needed
+            
+            //let updatedClass = fitnessClasses[index]
+            //PUT
+            let mealID = experience.id
+            
+            let updateMealURL = self.baseURL.appendingPathComponent("meals/\(mealID)")
+            
+            //creating its own json file for name change
+     
+            let params = ["item_name": changeitemNameto] as [String: Any]
+            let json = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+       
+            
+            guard let bearer = self.token else {
+                completion(NSError())
+                return
+            }
+            
+            var request = URLRequest(url: updateMealURL)
+            request.httpMethod = HTTPMethod.put.rawValue
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue(bearer.token, forHTTPHeaderField: "Authorization")
+            
+            //request httpBody of our own json format
+            request.httpBody = json
+
+            URLSession.shared.dataTask(with: request) { (_, response, error) in
+                if let response = response as? HTTPURLResponse,
+                    response.statusCode != 200 {
+                    completion(NSError(domain: "", code: response.statusCode, userInfo: nil))
+                    return
+                }
+                
+                if let error = error {
+                    print(error)
+                    completion(error)
+                    return
+                }
+                completion(nil)
+                }.resume()
+        }
     
     
     

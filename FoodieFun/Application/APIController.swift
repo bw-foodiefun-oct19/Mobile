@@ -247,7 +247,7 @@ class APIController {
             //PUT
             let mealID = experience.id
             
-            let updateMealURL = self.baseURL.appendingPathComponent("meals/\(mealID)")
+            let updateExperienceURL = self.baseURL.appendingPathComponent("meals/\(mealID)")
             
             //creating its own json file for name change
      
@@ -260,7 +260,7 @@ class APIController {
                 return
             }
             
-            var request = URLRequest(url: updateMealURL)
+            var request = URLRequest(url: updateExperienceURL)
             request.httpMethod = HTTPMethod.put.rawValue
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.addValue(bearer.token, forHTTPHeaderField: "Authorization")
@@ -284,6 +284,42 @@ class APIController {
                 }.resume()
         }
     
+    //Delete
+    func deleteExperience(for experience: Experience, completion: @escaping (Error?) -> Void) {
+        
+        //Delete locally
+        guard let index = self.experiences.firstIndex(of: experience) else {return}
+        self.experiences.remove(at: index)
     
+        let mealID =  experience.id
+        
+        let deleteExperienceURL = self.baseURL.appendingPathComponent("meals/\(mealID)")
+        
+        guard let bearer = self.token else {
+            completion(NSError())
+            return
+        }
+        
+        var request = URLRequest(url: deleteExperienceURL)
+        request.httpMethod = HTTPMethod.delete.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(bearer.token, forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { (_, response, error) in
+            
+            if let response = response as? HTTPURLResponse {
+                if response.statusCode != 200 {
+                    completion(NSError(domain: "", code: response.statusCode, userInfo: nil))
+                    return
+                }
+            }
+            
+            if let error = error {
+                print(error)
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
     
 }

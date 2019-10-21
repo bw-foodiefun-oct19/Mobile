@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Experience: Codable {
+struct Experience: Codable, Equatable {
     var id: Int
     var restaurantName: String
     var restaurantType: String

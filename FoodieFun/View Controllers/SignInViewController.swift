@@ -20,6 +20,7 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpElements()
+        loadFromDefaults()
     }
     
     func setUpElements() {
@@ -39,6 +40,10 @@ class SignInViewController: UIViewController {
         }
         
         let user = User(username: username, password: password)
+        
+        UserDefaults.standard.set(username, forKey: "username")
+        UserDefaults.standard.set(password, forKey: "password")
+        
         signIn(with: user)
     }
     
@@ -52,6 +57,11 @@ class SignInViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    func loadFromDefaults() {
+        emailTextField.text = UserDefaults.standard.string(forKey: "username") ?? ""
+        passwordTextField.text = UserDefaults.standard.string(forKey: "password") ?? ""
     }
     
     /*

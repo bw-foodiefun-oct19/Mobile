@@ -102,7 +102,7 @@
                                         <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="4US-X7-ZcW">
-                                        <rect key="frame" x="0.0" y="40.5" width="374" height="80.000000000000114"/>
+                                        <rect key="frame" x="0.0" y="40.5" width="374" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="34b-5V-D8b"/>
                                         </constraints>
@@ -162,8 +162,7 @@
                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wFD-Jp-2Ah">
                                     <rect key="frame" x="8" y="58" width="398" height="32"/>
                                     <segments>
-                                        <segment title="All"/>
-                                        <segment title="Place Name"/>
+                                        <segment title="Restaurant Name"/>
                                         <segment title="Food Name"/>
                                         <segment title="Rating"/>
                                     </segments>

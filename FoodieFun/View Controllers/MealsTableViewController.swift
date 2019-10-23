@@ -18,6 +18,8 @@ class MealsTableViewController: UITableViewController, UISearchBarDelegate {
     
     var filteredMeals: [Meal] = []
     
+    var isChanged: Bool = false
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if apiController.bearerSignIn?.token == nil {
@@ -45,25 +47,36 @@ class MealsTableViewController: UITableViewController, UISearchBarDelegate {
         
         let index = self.segementedControl.selectedSegmentIndex
         
-        guard let searchTerm = self.searchBar.text else {return}
+        self.isChanged = true
         
-        switch index {
-        case 0:
+        if let searchTerm = self.searchBar.text,
+        !searchTerm.isEmpty {
             
-            self.filteredMeals = self.apiController.allMeals
-            
-        case 1:
-            self.filteredMeals = self.apiController.allMeals.filter {$0.restaurantName?.contains(searchTerm) ?? false}
-        case 2:
-            self.filteredMeals = self.apiController.allMeals.filter {$0.itemName.contains(searchTerm)}
-        case 3:
-            let searchTermInt = Int(searchTerm)
-            self.filteredMeals = self.apiController.allMeals.filter {$0.foodRating == searchTermInt}
-        default:
-            self.filteredMeals = self.apiController.allMeals
+            switch index {
+                
+            case 0:
+                self.filteredMeals = self.apiController.allMeals.filter {$0.restaurantName?.contains(searchTerm) ?? false}
+            case 1:
+                self.filteredMeals = self.apiController.allMeals.filter {$0.itemName.contains(searchTerm)}
+            case 2:
+                let searchTermInt = Int(searchTerm)
+                self.filteredMeals = self.apiController.allMeals.filter {$0.foodRating == searchTermInt}
+            default:
+                self.filteredMeals = self.apiController.allMeals
+            }
+            self.tableView.reloadData()
+        } else {
+            self.isChanged = false
+            self.apiController.fetchMeals { (error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
         }
-        
-        self.tableView.reloadData()
     }
     
     
@@ -77,12 +90,23 @@ class MealsTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.filteredMeals.count
+        if !self.isChanged {
+            return self.apiController.allMeals.count
+        } else {
+            return self.filteredMeals.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let meal = self.filteredMeals[indexPath.row]
+        
+        var meal: Meal
+        
+        if !self.isChanged {
+            meal = self.apiController.allMeals[indexPath.row]
+        } else {
+            meal = self.filteredMeals[indexPath.row]
+        }
         cell.textLabel?.text = meal.itemName
         cell.detailTextLabel?.text = meal.dateVisited
         return cell
@@ -137,7 +161,11 @@ class MealsTableViewController: UITableViewController, UISearchBarDelegate {
         } else if segue.identifier == "ToUpdateMeal" {
             guard let destVC = segue.destination as? DetailMealViewController,
                 let selectedRow = self.tableView.indexPathForSelectedRow else {return}
-            destVC.meal = self.apiController.allMeals[selectedRow.row]
+            if !isChanged {
+                destVC.meal = self.apiController.allMeals[selectedRow.row]
+            } else {
+                destVC.meal = self.filteredMeals[selectedRow.row]
+            }
             destVC.apiController = self.apiController
         }
     }

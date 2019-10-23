@@ -29,7 +29,7 @@ class APIController {
     var token: Token?
     
     //for local array from fetching experiences
-    var experiences: [Experience] = []
+    var experiences: [ExperienceRepresentation] = []
     
     //TODO: - fix to use result type instead of just networkError
     func signUp(with user: User, completion: @escaping(Error?) -> Void) {
@@ -163,7 +163,7 @@ class APIController {
                    jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                    
                    do {
-                       let allExperiences = try jsonDecoder.decode([Experience].self, from: data)
+                       let allExperiences = try jsonDecoder.decode([ExperienceRepresentation].self, from: data)
                        
                        /*
                        it seems like backend is not designed to combine all experiences (meals) from all users
@@ -190,7 +190,7 @@ class APIController {
     func createExperience(for itemName: String, restaurantName: String, restaurantType: String, itemPhoto: String, foodRating: Int, itemComment: String, waitTime: String, dateVisited: Date, completion:@escaping(Error?)->()) {
     
         //change id and userID in experience to be optional and id and userID here to be nil
-        let experience = Experience(id: 0, restaurantName: restaurantName, restaurantType: restaurantType, itemName: itemName, itemPhoto: itemPhoto, foodRating: foodRating, itemComment: itemComment, waitTime: waitTime, dateVisited: Date(), userID: 0)
+        let experience = ExperienceRepresentation(id: <#T##Int#>, restaurantName: <#T##String#>, restaurantType: <#T##String#>, itemName: <#T##String#>, itemPhoto: <#T##String#>, foodRating: <#T##Int#>, itemComment: <#T##String#>, waitTime: <#T##String#>, dateVisited: <#T##Date#>, userID: <#T##Int#>)
         
         //POST
         let createExperienceURL = self.baseURL.appendingPathComponent("meals")
@@ -234,7 +234,7 @@ class APIController {
     }
     
     //Updating experience - PUT - meals/id# for this specifi meal
-        func updateExperience(for experience: Experience, changeitemNameto: String, changerestaurantNameto: String, changerestaurantTypeto: String, changeitemPhototo: String, changefoodRatingto: Int?, changeitemCommentto: String, changewaitTimeto: String, changedateVisitedto: String, completion:@escaping (Error?)->Void) {
+        func updateExperience(for experience: ExperienceRepresentation, changeitemNameto: String, changerestaurantNameto: String, changerestaurantTypeto: String, changeitemPhototo: String, changefoodRatingto: Int?, changeitemCommentto: String, changewaitTimeto: String, changedateVisitedto: String, completion:@escaping (Error?)->Void) {
             
             //making sure passed meal exists in array of allMeals
             guard let index = self.experiences.firstIndex(of: experience) else {return}
@@ -285,7 +285,7 @@ class APIController {
         }
     
     //Delete
-    func deleteExperience(for experience: Experience, completion: @escaping (Error?) -> Void) {
+    func deleteExperience(for experience: ExperienceRepresentation, completion: @escaping (Error?) -> Void) {
         
         //Delete locally
         guard let index = self.experiences.firstIndex(of: experience) else {return}

@@ -20,6 +20,7 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpElements()
+        loadFromDefaults()
     }
     
     func setUpElements() {
@@ -39,6 +40,10 @@ class SignInViewController: UIViewController {
         }
         
         let user = User(username: username, password: password)
+        
+        UserDefaults.standard.set(username, forKey: "username")
+        UserDefaults.standard.set(password, forKey: "password")
+        
         signIn(with: user)
     }
     
@@ -54,14 +59,9 @@ class SignInViewController: UIViewController {
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func loadFromDefaults() {
+        emailTextField.text = UserDefaults.standard.string(forKey: "username") ?? ""
+        passwordTextField.text = UserDefaults.standard.string(forKey: "password") ?? ""
     }
-    */
 
 }

@@ -182,7 +182,7 @@ class SearchViewController: UIViewController, MKMapViewDelegate, UISearchBarDele
         foodSearchMapView.mapType = .standard
         foodSearchMapView.delegate = self
         foodSearchMapView.showsScale = true
-        foodSearchMapView.showsCompass = true
+//        foodSearchMapView.showsCompass = true
         let coordinateRegion = MKCoordinateRegion.init(center: userCurrentLocation.coordinate,
                                                        latitudinalMeters: searchRadius * 5.0,
                                                        longitudinalMeters: searchRadius * 5.0)

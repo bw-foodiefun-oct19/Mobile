@@ -8,29 +8,22 @@
 
 import UIKit
 
-class AddExperienceViewController: UIViewController {
+class AddExperienceViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var restaurantNameTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setRestaurantName()
-
-        // Do any additional setup after loading the view.
+        detectTap()
     }
     
     func setRestaurantName() {
         restaurantNameTextField.text = selectedRestaurantTitle
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func detectTap() {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        self.view.addGestureRecognizer(tap)
     }
-    */
-
+    
 }

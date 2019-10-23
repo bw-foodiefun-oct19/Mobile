@@ -25,6 +25,7 @@
 		CCEB9219235FDE360072ACBA /* ExperienceRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9218235FDE360072ACBA /* ExperienceRepresentation.swift */; };
 		CCEB921B235FDF3B0072ACBA /* Experience+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEB921A235FDF3B0072ACBA /* Experience+Convenience.swift */; };
 		CE5CFF1823581C4100DBF1BA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CFF1723581C4000DBF1BA /* SearchViewController.swift */; };
+		CE6C0012235FF515006A4B3A /* AddExperienceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6C0011235FF515006A4B3A /* AddExperienceViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		CCEB9218235FDE360072ACBA /* ExperienceRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceRepresentation.swift; sourceTree = "<group>"; };
 		CCEB921A235FDF3B0072ACBA /* Experience+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Experience+Convenience.swift"; sourceTree = "<group>"; };
 		CE5CFF1723581C4000DBF1BA /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		CE6C0011235FF515006A4B3A /* AddExperienceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExperienceViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 				29CB6368235967C6003D56DC /* SignUpViewController.swift */,
 				CCA5759A235A169C004F17BA /* SignInViewController.swift */,
 				CCA5759C235A1A1E004F17BA /* ExperiencesTableViewController.swift */,
+				CE6C0011235FF515006A4B3A /* AddExperienceViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				29CB636C23596823003D56DC /* APIController.swift in Sources */,
 				29CB6369235967C6003D56DC /* SignUpViewController.swift in Sources */,
 				29CB63652359648B003D56DC /* User.swift in Sources */,
+				CE6C0012235FF515006A4B3A /* AddExperienceViewController.swift in Sources */,
 				CE5CFF1823581C4100DBF1BA /* SearchViewController.swift in Sources */,
 				CCEB921B235FDF3B0072ACBA /* Experience+Convenience.swift in Sources */,
 				CCB15A4B235B6E0F000F3A55 /* Utilities.swift in Sources */,

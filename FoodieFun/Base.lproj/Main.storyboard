@@ -102,7 +102,7 @@
                                         <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="4US-X7-ZcW">
-                                        <rect key="frame" x="0.0" y="40.5" width="374" height="80"/>
+                                        <rect key="frame" x="0.0" y="40.5" width="374" height="80.000000000000114"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="34b-5V-D8b"/>
                                         </constraints>
@@ -140,7 +140,7 @@
             </objects>
             <point key="canvasLocation" x="2945" y="-609"/>
         </scene>
-        <!--Foodie Fun-->
+        <!--Meals Table View Controller-->
         <scene sceneID="k66-yL-M0Z">
             <objects>
                 <tableViewController id="Df5-yD-TxH" customClass="MealsTableViewController" customModule="FoodieFun" customModuleProvider="target" sceneMemberID="viewController">
@@ -149,22 +149,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="NLd-cm-Ixd" detailTextLabel="WzM-lE-spH" rowHeight="76" style="IBUITableViewCellStyleSubtitle" id="pzm-xS-Fri">
-                                <rect key="frame" x="0.0" y="28" width="414" height="76"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="NLd-cm-Ixd" detailTextLabel="WzM-lE-spH" rowHeight="105" style="IBUITableViewCellStyleSubtitle" id="pzm-xS-Fri">
+                                <rect key="frame" x="0.0" y="28" width="414" height="105"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pzm-xS-Fri" id="4Od-fX-d6v">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="105"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NLd-cm-Ixd">
-                                            <rect key="frame" x="20" y="18" width="33.5" height="20.5"/>
+                                            <rect key="frame" x="20" y="32" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WzM-lE-spH">
-                                            <rect key="frame" x="20" y="41.5" width="44" height="14.5"/>
+                                            <rect key="frame" x="20" y="55.5" width="44" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
@@ -182,8 +182,21 @@
                             <outlet property="delegate" destination="Df5-yD-TxH" id="zIK-cu-SIn"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Foodie Fun" id="hGr-rr-NjD">
+                    <navigationItem key="navigationItem" id="hGr-rr-NjD">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="hAc-3B-BPi">
+                            <rect key="frame" x="95" y="22" width="224" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhite" id="ZfU-VG-kRb">
+                                    <rect key="frame" x="28" y="-17" width="165" height="37"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </view>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="U64-ec-dSQ">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="YRp-LI-gfn" kind="show" identifier="ToCreateMeal" id="bwE-Zd-Gzn"/>
                             </connections>
@@ -293,7 +306,20 @@
                         <viewLayoutGuide key="safeArea" id="PHJ-rJ-efb"/>
                     </view>
                     <navigationItem key="navigationItem" id="bkZ-XL-OTG">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="tVW-eQ-6tV">
+                            <rect key="frame" x="50" y="22" width="301" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="KKs-MH-8sN">
+                                    <rect key="frame" x="77" y="-22" width="157" height="43"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </view>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="kuW-gW-gfL">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="saveMealButtonTapped:" destination="YRp-LI-gfn" id="fOv-wJ-xCD"/>
                             </connections>
@@ -475,7 +501,8 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="COR-3Q-x3V">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.90588235289999997" green="0.43529411759999997" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.94149035219999999" green="0.51895129679999996" blue="0.12267810849999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

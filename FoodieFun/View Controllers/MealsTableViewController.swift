@@ -8,9 +8,15 @@
 
 import UIKit
 
-class MealsTableViewController: UITableViewController {
+class MealsTableViewController: UITableViewController, UISearchBarDelegate {
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var segementedControl: UISegmentedControl!
+    
     
     let apiController = APIController()
+    
+    var filteredMeals: [Meal] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -32,8 +38,35 @@ class MealsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.searchBar.delegate = self
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        let index = self.segementedControl.selectedSegmentIndex
+        
+        guard let searchTerm = self.searchBar.text else {return}
+        
+        switch index {
+        case 0:
+            
+            self.filteredMeals = self.apiController.allMeals
+            
+        case 1:
+            self.filteredMeals = self.apiController.allMeals.filter {$0.restaurantName?.contains(searchTerm) ?? false}
+        case 2:
+            self.filteredMeals = self.apiController.allMeals.filter {$0.itemName.contains(searchTerm)}
+        case 3:
+            let searchTermInt = Int(searchTerm)
+            self.filteredMeals = self.apiController.allMeals.filter {$0.foodRating == searchTermInt}
+        default:
+            self.filteredMeals = self.apiController.allMeals
+        }
+        
+        self.tableView.reloadData()
+    }
+    
+    
     
     // MARK: - Table view data source
     
@@ -44,12 +77,12 @@ class MealsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.apiController.allMeals.count
+        return self.filteredMeals.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let meal = self.apiController.allMeals[indexPath.row]
+        let meal = self.filteredMeals[indexPath.row]
         cell.textLabel?.text = meal.itemName
         cell.detailTextLabel?.text = meal.dateVisited
         return cell
@@ -63,8 +96,8 @@ class MealsTableViewController: UITableViewController {
      }
      */
     
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let meal = self.apiController.allMeals[indexPath.row]
         self.apiController.deleteMeal(for: meal) { (error) in
             if let error = error {
@@ -73,8 +106,8 @@ class MealsTableViewController: UITableViewController {
             }
         }
         self.tableView.deleteRows(at: [indexPath], with: .automatic)
-     }
-
+    }
+    
     
     /*
      // Override to support rearranging the table view.
@@ -109,3 +142,4 @@ class MealsTableViewController: UITableViewController {
         }
     }
 }
+

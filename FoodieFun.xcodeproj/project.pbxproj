@@ -22,6 +22,8 @@
 		CCB15A45235B6B18000F3A55 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB15A44235B6B18000F3A55 /* CoreDataStack.swift */; };
 		CCB15A48235B6B5C000F3A55 /* FoodieFun.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CCB15A46235B6B5C000F3A55 /* FoodieFun.xcdatamodeld */; };
 		CCB15A4B235B6E0F000F3A55 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB15A4A235B6E0F000F3A55 /* Utilities.swift */; };
+		CCEB9219235FDE360072ACBA /* ExperienceRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEB9218235FDE360072ACBA /* ExperienceRepresentation.swift */; };
+		CCEB921B235FDF3B0072ACBA /* Experience+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEB921A235FDF3B0072ACBA /* Experience+Convenience.swift */; };
 		CE5CFF1823581C4100DBF1BA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5CFF1723581C4000DBF1BA /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,8 @@
 		CCB15A44235B6B18000F3A55 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		CCB15A47235B6B5C000F3A55 /* FoodieFun.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FoodieFun.xcdatamodel; sourceTree = "<group>"; };
 		CCB15A4A235B6E0F000F3A55 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		CCEB9218235FDE360072ACBA /* ExperienceRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceRepresentation.swift; sourceTree = "<group>"; };
+		CCEB921A235FDF3B0072ACBA /* Experience+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Experience+Convenience.swift"; sourceTree = "<group>"; };
 		CE5CFF1723581C4000DBF1BA /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,6 +101,8 @@
 				29CB6366235964B3003D56DC /* Experience.swift */,
 				29CB636D235968BA003D56DC /* Token.swift */,
 				CCB15A46235B6B5C000F3A55 /* FoodieFun.xcdatamodeld */,
+				CCEB9218235FDE360072ACBA /* ExperienceRepresentation.swift */,
+				CCEB921A235FDF3B0072ACBA /* Experience+Convenience.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -200,10 +206,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCEB9219235FDE360072ACBA /* ExperienceRepresentation.swift in Sources */,
 				29CB636C23596823003D56DC /* APIController.swift in Sources */,
 				29CB6369235967C6003D56DC /* SignUpViewController.swift in Sources */,
 				29CB63652359648B003D56DC /* User.swift in Sources */,
 				CE5CFF1823581C4100DBF1BA /* SearchViewController.swift in Sources */,
+				CCEB921B235FDF3B0072ACBA /* Experience+Convenience.swift in Sources */,
 				CCB15A4B235B6E0F000F3A55 /* Utilities.swift in Sources */,
 				0B7BB57C2357EBCB00B8958B /* AppDelegate.swift in Sources */,
 				CCA5759B235A169C004F17BA /* SignInViewController.swift in Sources */,

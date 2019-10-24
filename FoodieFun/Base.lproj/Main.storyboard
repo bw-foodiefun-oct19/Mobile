@@ -102,7 +102,7 @@
                                         <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="4US-X7-ZcW">
-                                        <rect key="frame" x="0.0" y="40.5" width="374" height="80.000000000000114"/>
+                                        <rect key="frame" x="0.0" y="40.5" width="374" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="34b-5V-D8b"/>
                                         </constraints>
@@ -483,11 +483,9 @@
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="y2m-Hd-sT2">
                                                 <rect key="frame" x="0.0" y="24.5" width="334" height="32"/>
                                                 <segments>
-                                                    <segment title="1"/>
-                                                    <segment title="2"/>
-                                                    <segment title="3"/>
-                                                    <segment title="4"/>
-                                                    <segment title="5"/>
+                                                    <segment title="⭐️"/>
+                                                    <segment title="⭐️⭐️"/>
+                                                    <segment title="⭐️⭐️⭐️"/>
                                                 </segments>
                                             </segmentedControl>
                                         </subviews>

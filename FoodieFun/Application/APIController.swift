@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 enum HTTPMethod: String {
     case get = "GET"
@@ -25,11 +26,12 @@ enum NetworkError: Error {
 
 class APIController {
     
+//    init() {
+//        fetchExperiencesFromServer()
+//    }
+    
     private let baseURL = URL(string: "https://backend-foodie-fun.herokuapp.com/api/")!
     var token: Token?
-    
-    //for local array from fetching experiences
-    var experiences: [ExperienceRepresentation] = []
     
     //TODO: - fix to use result type instead of just networkError
     func signUp(with user: User, completion: @escaping(Error?) -> Void) {
@@ -113,6 +115,7 @@ class APIController {
             do {
                 let token = try JSONDecoder().decode(Token.self, from: data)
                 self.token = token
+                self.fetchExperiencesFromServer()
             } catch {
                 NSLog("Error decoding the bearer token: \(error)")
                 completion(error)
@@ -122,10 +125,19 @@ class APIController {
         }.resume()
     }
     
-    //FetchingExperience - GET - requried fields -> username, password and token
-    func fetchExperiences(completion: @escaping (Error?)-> Void) {
-        
-        guard let bearer = token else {
+    @discardableResult func createExperience(itemName: String, restaurantName: String?, restaurantType: String?, itemPhoto: String?, foodRating: Int?, itemComment: String?, waitTime: String?, dateVisited: Date = Date()) -> Experience {
+        let experience = Experience(restaurantName: restaurantName, restaurantType: restaurantType, itemName: itemName, itemPhoto: itemPhoto, foodRating: foodRating, itemComment: itemComment, waitTime: waitTime, dateVisited: dateVisited, context: CoreDataStack.shared.mainContext)
+        post(experience: experience)
+        return experience
+    }
+    
+    func delete(experience: Experience) {
+        CoreDataStack.shared.mainContext.delete(experience)
+        CoreDataStack.shared.save()
+    }
+    
+    func fetchExperiencesFromServer(completion: @escaping (Error?)-> Void = { _ in }) {
+        guard let token = token else {
             print("there is no bearer for fetchingMeals")
             return
         }
@@ -135,7 +147,7 @@ class APIController {
         var request = URLRequest(url: instructorURL)
         request.httpMethod = HTTPMethod.get.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(bearer.token, forHTTPHeaderField: "Authorization")
+        request.addValue(token.token, forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let response = response as? HTTPURLResponse,
@@ -154,167 +166,108 @@ class APIController {
                 return
             }
             
-            let jsonDecoder = JSONDecoder()
-            
-            jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-            
             do {
-                let allExperiences = try jsonDecoder.decode([ExperienceRepresentation].self, from: data)
-                
-                /*
-                 it seems like backend is not designed to combine all experiences (meals) from all users
-                 myMeals for each user
-                 let userID = self.bearer?.id
-                 let myMeals = fitnessClasses.filter{$0.id == userID}
-                 self.meals = myMeals
-                 */
-                
-                //all meals from all users
-                self.experiences = allExperiences
-                
-                completion(nil)
+                let decoder = JSONDecoder()
+                let experienceRepresentations = try decoder.decode([String: ExperienceRepresentation].self, from: data).map({ $0.value })
+                self.updateExperiences(with: experienceRepresentations)
             } catch {
-                NSLog("Error decoding animal objects: \(error)")
+                NSLog("Error decoding experience objects: \(error)")
                 completion(error)
                 return
             }
         }.resume()
     }
     
-    
-    //Creating Experience - POST - requried fields -> item_name
-    func createExperience(for itemName: String, restaurantName: String, restaurantType: String, itemPhoto: String, foodRating: Int, itemComment: String, waitTime: String, dateVisited: Date, completion:@escaping(Error?)->()) {
-    
-        //change id and userID in experience to be optional and id and userID here to be nil
-        let experience = ExperienceRepresentation(id: 0, restaurantName: restaurantName, restaurantType: restaurantType, itemName: itemName, itemPhoto: itemPhoto, foodRating: foodRating, itemComment: itemComment, waitTime: waitTime, dateVisited: dateVisited, userID: 0)
+    func updateExperience(experience: Experience, itemName: String, restaurantName: String?, restaurantType: String?, itemPhoto: String?, foodRating: Int?, itemComment: String?, waitTime: String?, dateVisited: Date = Date()) {
+        experience.itemName = itemName
+        experience.restaurantName = restaurantName
+        experience.restaurantType = restaurantType
+        experience.itemPhoto = itemPhoto
+        experience.foodRating = Int16(foodRating ?? 0)
+        experience.itemComment = itemComment
+        experience.waitTime = waitTime
+        experience.dateVisited = dateVisited
         
-        //POST
-        let createExperienceURL = self.baseURL.appendingPathComponent("meals")
+        post(experience: experience)
+        CoreDataStack.shared.save()
+    }
+    
+    func updateExperiences(with representations: [ExperienceRepresentation]) {
+        let identifiersToFetch = representations.compactMap( {$0.id} )
+        let representationsByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, representations))
+        var experiencesToCreate = representationsByID
         
-        guard let bearer = self.token else {
-            completion(NSError())
+        let context = CoreDataStack.shared.mainContext
+        context.performAndWait {
+            do {
+                let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
+                fetchRequest.predicate = NSPredicate(format: "identifier IN %@", identifiersToFetch)
+                
+                let existingExperiences = try context.fetch(fetchRequest)
+                
+                for experience in existingExperiences {
+                    let id = Int(experience.id)
+                    guard let representation = representationsByID[id] else { continue }
+                    
+                    experience.itemName = representation.itemName
+                    experience.restaurantName = representation.restaurantName
+                    experience.restaurantType = representation.restaurantType
+                    experience.itemPhoto = representation.itemPhoto
+                    experience.foodRating = Int16(representation.foodRating ?? 0)
+                    experience.itemComment = representation.itemComment
+                    experience.waitTime = representation.waitTime
+                    experience.dateVisited = representation.dateVisited
+                    
+                    experiencesToCreate.removeValue(forKey: id)
+                }
+                
+                for representation in experiencesToCreate.values {
+                    Experience(experienceRepresentation: representation, context: context)
+                }
+                
+                CoreDataStack.shared.save(context: context)
+            } catch {
+                print("Error fetching experiences from persistent store: \(error)")
+            }
+        }
+    }
+    
+    func post(experience: Experience, completion: @escaping () -> Void = {}) {
+        let identifier = experience.id
+        experience.id = identifier
+        
+        guard let token = self.token else {
+            completion()
             return
         }
         
-        var request = URLRequest(url: createExperienceURL)
-        request.httpMethod = HTTPMethod.post.rawValue
+        let requestURL = baseURL.appendingPathComponent("meals").appendingPathComponent("\(identifier)")
+        var request = URLRequest(url: requestURL)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(bearer.token, forHTTPHeaderField: "Authorization")
+        request.addValue(token.token, forHTTPHeaderField: "Authorization")
+        request.httpMethod = HTTPMethod.post.rawValue
         
-        let jsonEncoder = JSONEncoder()
-        
-        jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
+        guard let experienceRepresentation = experience.experienceRepresentation else {
+            print("Experience representation is nil")
+            completion()
+            return
+        }
         
         do {
-            let jsonData = try jsonEncoder.encode(experience)
-            request.httpBody = jsonData
+            request.httpBody = try JSONEncoder().encode(experienceRepresentation)
         } catch {
-            NSLog("Error encoding user objects: \(error)")
-            completion(error)
+            print("Error encoding experience representation: \(error)")
+            completion()
             return
         }
         
-        URLSession.shared.dataTask(with: request) { (_, response, error) in
-            if let response = response as? HTTPURLResponse,
-                response.statusCode != 201 {
-                completion(NSError(domain: "", code: response.statusCode, userInfo: nil))
-                return
-            }
-            if let _ = error {
-                completion(NSError())
-                return
-            }
-            self.experiences.append(experience)
-            completion(nil)
-            }.resume()
-    }
-    
-    //Updating experience - PUT - meals/id# for this specifi meal
-    func updateExperience(for experience: ExperienceRepresentation, changeitemNameto: String, changerestaurantNameto: String, changerestaurantTypeto: String, changeitemPhototo: String, changefoodRatingto: Int?, changeitemCommentto: String, changewaitTimeto: String, changedateVisitedto: String, completion:@escaping (Error?)->Void) {
-        
-        //making sure passed meal exists in array of allMeals
-        guard let index = self.experiences.firstIndex(of: experience) else {return}
-        self.experiences[index].itemName = changeitemNameto
-        //        self.allMeals[index].restaurantName = changerestaurantNameto!
-        //        self.allMeals[index].restaurantType = changerestaurantTypeto!
-        //add more change update as needed
-        
-        //let updatedClass = fitnessClasses[index]
-        //PUT
-        let mealID = experience.id
-        
-        let updateExperienceURL = self.baseURL.appendingPathComponent("meals/\(mealID)")
-        
-        //creating its own json file for name change
-        
-        let params = ["item_name": changeitemNameto] as [String: Any]
-        let json = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-        
-        
-        guard let bearer = self.token else {
-            completion(NSError())
-            return
-        }
-        
-        var request = URLRequest(url: updateExperienceURL)
-        request.httpMethod = HTTPMethod.put.rawValue
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(bearer.token, forHTTPHeaderField: "Authorization")
-        
-        //request httpBody of our own json format
-        request.httpBody = json
-        
-        URLSession.shared.dataTask(with: request) { (_, response, error) in
-            if let response = response as? HTTPURLResponse,
-                response.statusCode != 200 {
-                completion(NSError(domain: "", code: response.statusCode, userInfo: nil))
-                return
-            }
-            
+        URLSession.shared.dataTask(with: request) { (_, _, error) in
             if let error = error {
-                print(error)
-                completion(error)
+                print("Error PUTing experience: \(error)")
+                completion()
                 return
             }
-            completion(nil)
-        }.resume()
-    }
-    
-    //Delete
-    func deleteExperience(for experience: ExperienceRepresentation, completion: @escaping (Error?) -> Void) {
-        
-        //Delete locally
-        guard let index = self.experiences.firstIndex(of: experience) else {return}
-        self.experiences.remove(at: index)
-    
-        let mealID =  experience.id
-        
-        let deleteExperienceURL = self.baseURL.appendingPathComponent("meals/\(mealID)")
-        
-        guard let bearer = self.token else {
-            completion(NSError())
-            return
-        }
-        
-        var request = URLRequest(url: deleteExperienceURL)
-        request.httpMethod = HTTPMethod.delete.rawValue
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(bearer.token, forHTTPHeaderField: "Authorization")
-        
-        URLSession.shared.dataTask(with: request) { (_, response, error) in
-            
-            if let response = response as? HTTPURLResponse {
-                if response.statusCode != 200 {
-                    completion(NSError(domain: "", code: response.statusCode, userInfo: nil))
-                    return
-                }
-            }
-            
-            if let error = error {
-                print(error)
-                return
-            }
-            completion(nil)
+            completion()
         }.resume()
     }
     

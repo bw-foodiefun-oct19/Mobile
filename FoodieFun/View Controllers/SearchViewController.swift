@@ -66,7 +66,7 @@ class SearchViewController: UIViewController, MKMapViewDelegate, UISearchBarDele
     // Search radius
     let searchRadius: CLLocationDistance = 10
     
-
+    var apiController: APIController?
     
     // viewDidLoad
     override func viewDidLoad() {
@@ -92,6 +92,14 @@ class SearchViewController: UIViewController, MKMapViewDelegate, UISearchBarDele
             searchInMap()
             
             searchBar.resignFirstResponder()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addExperienceSegue" {
+            if let addExperienceVC = segue.destination as? AddExperienceViewController {
+                addExperienceVC.apiController = apiController
+            }
         }
     }
     

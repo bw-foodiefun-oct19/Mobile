@@ -209,6 +209,12 @@
                                         <constraint firstItem="R8Y-An-35z" firstAttribute="bottom" secondItem="4Od-fX-d6v" secondAttribute="bottomMargin" id="wCJ-C5-0o5"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="backgroundImageView" destination="nZa-VV-ANJ" id="dic-n6-ZxB"/>
+                                    <outlet property="dateVisitedLabel" destination="iGp-eO-pND" id="HUr-CR-jen"/>
+                                    <outlet property="priceLabel" destination="R8Y-An-35z" id="vyl-uJ-G9e"/>
+                                    <outlet property="restaurantName" destination="Q8O-rn-oKT" id="Qej-vq-gxz"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -483,6 +489,7 @@
                     <navigationItem key="navigationItem" id="5wd-oc-fBd"/>
                     <connections>
                         <outlet property="cuisineTypeTextField" destination="GWY-tI-QRL" id="32v-dM-hXv"/>
+                        <outlet property="experienceLabel" destination="yLb-1t-FHP" id="2m1-oq-GyB"/>
                         <outlet property="menuItemTextField" destination="0pg-gt-BLE" id="qhP-Ar-2Ea"/>
                         <outlet property="priceTextField" destination="TZ6-on-BOi" id="u9W-t3-AiY"/>
                         <outlet property="restaurantNameTextField" destination="rhW-1b-P3K" id="lcR-NG-T0x"/>

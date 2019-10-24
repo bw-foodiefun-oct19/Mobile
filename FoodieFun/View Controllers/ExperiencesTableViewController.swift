@@ -55,7 +55,7 @@ class ExperiencesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "experienceCell", for: indexPath) as? ExperienceTableViewCell else { return UITableViewCell() }
         
-        
+        cell.experience = fetchedResultsController.object(at: indexPath)
         
         return cell
     }

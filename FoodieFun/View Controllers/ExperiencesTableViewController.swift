@@ -12,6 +12,7 @@ import CoreData
 class ExperiencesTableViewController: UITableViewController {
     
     let apiController = APIController()
+    let images = ["eggsBG", "fishBG", "hummusBG", "kebabBG", "mealBG", "pitaBG", "pizzaBG", "saladBG", "steakBG", "toastBG", "tritipBG", "twoSaladsBG"]
     
     lazy var fetchedResultsController: NSFetchedResultsController<Experience> = {
         let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
@@ -59,7 +60,14 @@ class ExperiencesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "experienceCell", for: indexPath) as? ExperienceTableViewCell else { return UITableViewCell() }
         
+        cell.layer.masksToBounds = true
+        cell.layer.cornerRadius = 5
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = #colorLiteral(red: 0.2189036906, green: 0.3357507586, blue: 0.3665895164, alpha: 1)
         cell.experience = fetchedResultsController.object(at: indexPath)
+        
+        let randomNumber = Int.random(in: 0...images.count-1)
+        cell.backgroundImageView.image = UIImage(named: images[randomNumber])
         
         return cell
     }
@@ -72,7 +80,7 @@ class ExperiencesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 200
     }
     
     // MARK: - Navigation

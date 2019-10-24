@@ -12,11 +12,11 @@ class ExperienceTableViewCell: UITableViewCell {
     
     @IBOutlet weak var restaurantName: UILabel!
     @IBOutlet weak var dateVisitedLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet var itemNameLabel: UILabel!
     
     let dateFormatter = DateFormatter()
+    
     
     var experience: Experience? {
         didSet {
@@ -30,7 +30,6 @@ class ExperienceTableViewCell: UITableViewCell {
         itemNameLabel.text = experience?.itemName
         let dateVisited = dateFormatter.string(from: experience?.dateVisited ?? Date())
         dateVisitedLabel.text = dateVisited
-        self
     }
 
     override func awakeFromNib() {

@@ -17,6 +17,7 @@ class AddExperienceViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var reviewTextView: UITextView!
     @IBOutlet weak var shareExperienceButton: UIButton!
     @IBOutlet weak var experienceLabel: UILabel!
+    @IBOutlet var ratingSegmentedControl: UISegmentedControl!
     
     var apiController: APIController?
     
@@ -37,7 +38,6 @@ class AddExperienceViewController: UIViewController, UITextFieldDelegate {
             !itemName.isEmpty else { return }
         
         if let experience = experience {
-            
             apiController?.updateExperience(experience: experience, itemName: itemName, restaurantName: restaurantName, restaurantType: cuisineTypeTextField.text ?? "", itemPhoto: "", foodRating: Int.random(in: 1...5), itemComment: reviewTextView.text ?? "", waitTime: "", dateVisited: Date())
         } else {
             apiController?.createExperience(itemName: itemName, restaurantName: restaurantName, restaurantType: cuisineTypeTextField.text ?? "", itemPhoto: "", foodRating: Int.random(in: 1...5), itemComment: reviewTextView.text, waitTime: "", dateVisited: Date())

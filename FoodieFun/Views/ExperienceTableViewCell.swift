@@ -14,6 +14,7 @@ class ExperienceTableViewCell: UITableViewCell {
     @IBOutlet weak var dateVisitedLabel: UILabel!
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet var itemNameLabel: UILabel!
+    @IBOutlet var ratingLabel: UILabel!
     
     let dateFormatter = DateFormatter()
     

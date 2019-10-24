@@ -181,11 +181,22 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="foF-ft-Qas">
+                                                    <rect key="frame" x="20" y="6" width="100" height="16.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="TpI-pf-tAQ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.16862745100000001" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="28" id="8wG-Zm-LXE"/>
                                                 <constraint firstItem="iGp-eO-pND" firstAttribute="centerY" secondItem="NsS-Na-Y1h" secondAttribute="centerY" id="Hq6-Pc-hiT"/>
+                                                <constraint firstItem="foF-ft-Qas" firstAttribute="leading" secondItem="NsS-Na-Y1h" secondAttribute="leading" constant="20" id="JFy-TX-5fQ"/>
+                                                <constraint firstItem="foF-ft-Qas" firstAttribute="centerY" secondItem="NsS-Na-Y1h" secondAttribute="centerY" id="Qpj-KS-3Gi"/>
                                                 <constraint firstAttribute="trailing" secondItem="iGp-eO-pND" secondAttribute="trailing" constant="20" id="tmx-NU-fbi"/>
                                             </constraints>
                                         </view>
@@ -225,6 +236,7 @@
                                     <outlet property="backgroundImageView" destination="56P-ox-Z2p" id="TnO-F5-bk7"/>
                                     <outlet property="dateVisitedLabel" destination="iGp-eO-pND" id="HUr-CR-jen"/>
                                     <outlet property="itemNameLabel" destination="t2y-LT-VbG" id="gBB-4j-1BA"/>
+                                    <outlet property="ratingLabel" destination="foF-ft-Qas" id="l82-0j-MEY"/>
                                     <outlet property="restaurantName" destination="Q8O-rn-oKT" id="Qej-vq-gxz"/>
                                     <segue destination="YRp-LI-gfn" kind="presentation" identifier="editExperienceSegue" id="u5q-2b-Yhb"/>
                                 </connections>
@@ -390,7 +402,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ZB6-Wg-Lw7">
-                                <rect key="frame" x="40" y="96" width="334" height="474.5"/>
+                                <rect key="frame" x="40" y="96" width="334" height="546"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kOR-Ss-NSh">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="58.5"/>
@@ -459,14 +471,35 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ehX-VF-ffo">
+                                        <rect key="frame" x="0.0" y="298" width="334" height="55.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u29-AE-qYy">
+                                                <rect key="frame" x="0.0" y="0.0" width="334" height="16.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                <color key="textColor" red="0.16862745100000001" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="y2m-Hd-sT2">
+                                                <rect key="frame" x="0.0" y="24.5" width="334" height="32"/>
+                                                <segments>
+                                                    <segment title="1"/>
+                                                    <segment title="2"/>
+                                                    <segment title="3"/>
+                                                    <segment title="4"/>
+                                                    <segment title="5"/>
+                                                </segments>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9Y-GQ-Czj">
-                                        <rect key="frame" x="0.0" y="298" width="334" height="16.5"/>
+                                        <rect key="frame" x="0.0" y="369.5" width="334" height="16.5"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                         <color key="textColor" red="0.16862745100000001" green="0.2666666667" blue="0.29411764709999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iSd-em-Qd0">
-                                        <rect key="frame" x="0.0" y="330.5" width="334" height="80"/>
+                                        <rect key="frame" x="0.0" y="402" width="334" height="80"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="G3E-qW-74S"/>
@@ -476,7 +509,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbh-hr-QIq">
-                                        <rect key="frame" x="0.0" y="426.5" width="334" height="48"/>
+                                        <rect key="frame" x="0.0" y="498" width="334" height="48"/>
                                         <color key="backgroundColor" red="0.90588235289999997" green="0.43529411759999997" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
                                         <state key="normal" title="Add">
@@ -505,6 +538,7 @@
                         <outlet property="experienceLabel" destination="yLb-1t-FHP" id="2m1-oq-GyB"/>
                         <outlet property="menuItemTextField" destination="0pg-gt-BLE" id="qhP-Ar-2Ea"/>
                         <outlet property="priceTextField" destination="TZ6-on-BOi" id="u9W-t3-AiY"/>
+                        <outlet property="ratingSegmentedControl" destination="y2m-Hd-sT2" id="Lc5-9T-mNo"/>
                         <outlet property="restaurantNameTextField" destination="rhW-1b-P3K" id="lcR-NG-T0x"/>
                         <outlet property="reviewTextView" destination="iSd-em-Qd0" id="Hwa-fJ-sUU"/>
                         <outlet property="shareExperienceButton" destination="hbh-hr-QIq" id="b4C-iW-GCE"/>

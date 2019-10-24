@@ -26,9 +26,9 @@ enum NetworkError: Error {
 
 class APIController {
     
-    init() {
-        fetchExperiencesFromServer()
-    }
+//    init() {
+//        fetchExperiencesFromServer()
+//    }
     
     private let baseURL = URL(string: "https://backend-foodie-fun.herokuapp.com/api/")!
     var token: Token?
@@ -115,6 +115,7 @@ class APIController {
             do {
                 let token = try JSONDecoder().decode(Token.self, from: data)
                 self.token = token
+                self.fetchExperiencesFromServer()
             } catch {
                 NSLog("Error decoding the bearer token: \(error)")
                 completion(error)
@@ -136,8 +137,7 @@ class APIController {
     }
     
     func fetchExperiencesFromServer(completion: @escaping (Error?)-> Void = { _ in }) {
-        
-        guard let bearer = token else {
+        guard let token = token else {
             print("there is no bearer for fetchingMeals")
             return
         }
@@ -147,7 +147,7 @@ class APIController {
         var request = URLRequest(url: instructorURL)
         request.httpMethod = HTTPMethod.get.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(bearer.token, forHTTPHeaderField: "Authorization")
+        request.addValue(token.token, forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let response = response as? HTTPURLResponse,
@@ -192,8 +192,6 @@ class APIController {
         CoreDataStack.shared.save()
     }
     
-    
-    
     func updateExperiences(with representations: [ExperienceRepresentation]) {
         let identifiersToFetch = representations.compactMap( {$0.id} )
         let representationsByID = Dictionary(uniqueKeysWithValues: zip(identifiersToFetch, representations))
@@ -234,24 +232,24 @@ class APIController {
         }
     }
     
-    func put(experience: Experience, completion: @escaping (Error?) -> Void = { _ in }) {
+    func put(experience: Experience, completion: @escaping () -> Void = {}) {
         let identifier = experience.id
         experience.id = identifier
         
-        guard let bearer = self.token else {
-            completion(NSError())
+        guard let token = self.token else {
+            completion()
             return
         }
         
         let requestURL = baseURL.appendingPathComponent("meals").appendingPathComponent("\(identifier)")
         var request = URLRequest(url: requestURL)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(bearer.token, forHTTPHeaderField: "Authorization")
+        request.addValue(token.token, forHTTPHeaderField: "Authorization")
         request.httpMethod = HTTPMethod.put.rawValue
         
         guard let experienceRepresentation = experience.experienceRepresentation else {
             print("Experience representation is nil")
-            completion(NSError())
+            completion()
             return
         }
         
@@ -259,17 +257,17 @@ class APIController {
             request.httpBody = try JSONEncoder().encode(experienceRepresentation)
         } catch {
             print("Error encoding experience representation: \(error)")
-            completion(error)
+            completion()
             return
         }
         
         URLSession.shared.dataTask(with: request) { (_, _, error) in
             if let error = error {
                 print("Error PUTing experience: \(error)")
-                completion(error)
+                completion()
                 return
             }
-            completion(nil)
+            completion()
         }.resume()
     }
     

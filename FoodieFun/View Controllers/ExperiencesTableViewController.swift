@@ -16,8 +16,8 @@ class ExperiencesTableViewController: UITableViewController {
     lazy var fetchedResultsController: NSFetchedResultsController<Experience> = {
         let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "itemName", ascending: false)]
-        let moc = CoreDataStack.shared.mainContext
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: "itemName", cacheName: nil)
+        
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.mainContext, sectionNameKeyPath: "itemName", cacheName: nil)
         frc.delegate = self
         
         do {
@@ -47,6 +47,10 @@ class ExperiencesTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return fetchedResultsController.sections?.count ?? 0
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fetchedResultsController.sections?[section].numberOfObjects ?? 0
@@ -73,6 +77,10 @@ class ExperiencesTableViewController: UITableViewController {
         if segue.identifier == "SignInViewModalSegue" {
             if let signInVC = segue.destination as? SignInViewController {
                 signInVC.apiController = apiController
+            }
+        } else if segue.identifier == "searchSegue" {
+            if let searchVC = segue.destination as? SearchViewController {
+                searchVC.apiController = apiController
             }
         }
     }

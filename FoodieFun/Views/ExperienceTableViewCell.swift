@@ -31,6 +31,9 @@ class ExperienceTableViewCell: UITableViewCell {
         itemNameLabel.text = experience?.itemName
         let dateVisited = dateFormatter.string(from: experience?.dateVisited ?? Date())
         dateVisitedLabel.text = dateVisited
+        if let rating = experience?.foodRating {
+            ratingLabel.text = "Rating: \(rating)"
+        }
     }
 
     override func awakeFromNib() {

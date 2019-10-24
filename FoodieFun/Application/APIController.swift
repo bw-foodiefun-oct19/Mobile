@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 enum HTTPMethod: String {
     case get = "GET"
@@ -159,19 +160,11 @@ class APIController {
             jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
             
             do {
-                let allExperiences = try jsonDecoder.decode([ExperienceRepresentation].self, from: data)
+                let experienceRepresentation = Array(try jsonDecoder.decode([String: ExperienceRepresentation].self, from: data).values)
                 
-                /*
-                 it seems like backend is not designed to combine all experiences (meals) from all users
-                 myMeals for each user
-                 let userID = self.bearer?.id
-                 let myMeals = fitnessClasses.filter{$0.id == userID}
-                 self.meals = myMeals
-                 */
+                let moc = CoreDataStack.shared.container.newBackgroundContext()
                 
-                //all meals from all users
-                self.experiences = allExperiences
-                
+                try self.updateExperiences(with: experienceRepresentation, context: moc)
                 completion(nil)
             } catch {
                 NSLog("Error decoding animal objects: \(error)")
@@ -179,6 +172,56 @@ class APIController {
                 return
             }
         }.resume()
+    }
+    
+    func updateExperiences(with representations: [ExperienceRepresentation], context: NSManagedObjectContext) throws {
+        var error: Error? = nil
+        
+        context.performAndWait {
+            for experienceRepresesntation in representations {
+                let experienceID = experienceRepresesntation.id
+                if let experience = self.experience(for: experienceID, in: context) {
+                    self.update(experience: experience, with: experienceRepresesntation)
+                } else {
+                    let _ = Experience(experienceRepresentation: experienceRepresesntation, context: context)
+                }
+            }
+            
+            do {
+                try context.save()
+            } catch let saveError {
+                error = saveError
+            }
+        }
+        
+        if let error = error { throw error }
+        try CoreDataStack.shared.save(context: context)
+    }
+    
+    func update(experience: Experience, with representation: ExperienceRepresentation) {
+        experience.restaurantName = representation.restaurantName
+        experience.restaurantType = representation.restaurantType
+        experience.dateVisited = representation.dateVisited
+        experience.foodRating = Int16(representation.foodRating)
+        experience.itemComment = representation.itemComment
+        experience.itemName = representation.itemName
+        experience.itemPhoto = representation.itemPhoto
+    }
+    
+    func experience(for experienceID: Int, in context: NSManagedObjectContext) -> Experience? {
+        let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "identifier == %@", experienceID as Int)
+        
+        var result: Experience? = nil
+        
+        context.performAndWait {
+            do {
+                result = try context.fetch(fetchRequest).first
+            } catch {
+                NSLog("Error fetching task with id: \(error)")
+            }
+        }
+        return result
     }
     
     

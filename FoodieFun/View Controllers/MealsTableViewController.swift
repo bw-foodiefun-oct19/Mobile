@@ -107,8 +107,8 @@ class MealsTableViewController: UITableViewController, UISearchBarDelegate {
         } else {
             meal = self.filteredMeals[indexPath.row]
         }
-        cell.textLabel?.text = meal.itemName
-        cell.detailTextLabel?.text = meal.dateVisited
+        let customCell = cell as! MealTableViewCell
+        customCell.meal = meal
         return cell
     }
     

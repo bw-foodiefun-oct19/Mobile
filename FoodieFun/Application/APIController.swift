@@ -127,7 +127,7 @@ class APIController {
     
     @discardableResult func createExperience(itemName: String, restaurantName: String?, restaurantType: String?, itemPhoto: String?, foodRating: Int?, itemComment: String?, waitTime: String?, dateVisited: Date = Date()) -> Experience {
         let experience = Experience(restaurantName: restaurantName, restaurantType: restaurantType, itemName: itemName, itemPhoto: itemPhoto, foodRating: foodRating, itemComment: itemComment, waitTime: waitTime, dateVisited: dateVisited, context: CoreDataStack.shared.mainContext)
-        put(experience: experience)
+        post(experience: experience)
         return experience
     }
     
@@ -188,7 +188,7 @@ class APIController {
         experience.waitTime = waitTime
         experience.dateVisited = dateVisited
         
-        put(experience: experience)
+        post(experience: experience)
         CoreDataStack.shared.save()
     }
     
@@ -232,7 +232,7 @@ class APIController {
         }
     }
     
-    func put(experience: Experience, completion: @escaping () -> Void = {}) {
+    func post(experience: Experience, completion: @escaping () -> Void = {}) {
         let identifier = experience.id
         experience.id = identifier
         
@@ -245,7 +245,7 @@ class APIController {
         var request = URLRequest(url: requestURL)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue(token.token, forHTTPHeaderField: "Authorization")
-        request.httpMethod = HTTPMethod.put.rawValue
+        request.httpMethod = HTTPMethod.post.rawValue
         
         guard let experienceRepresentation = experience.experienceRepresentation else {
             print("Experience representation is nil")

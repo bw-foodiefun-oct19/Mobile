@@ -14,6 +14,7 @@ class ExperienceTableViewCell: UITableViewCell {
     @IBOutlet weak var dateVisitedLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet var itemNameLabel: UILabel!
     
     let dateFormatter = DateFormatter()
     
@@ -26,8 +27,10 @@ class ExperienceTableViewCell: UITableViewCell {
     func updateViews() {
         restaurantName.text = experience?.restaurantName
         dateFormatter.dateFormat = "MM-dd-yyy"
+        itemNameLabel.text = experience?.itemName
         let dateVisited = dateFormatter.string(from: experience?.dateVisited ?? Date())
         dateVisitedLabel.text = dateVisited
+        self
     }
 
     override func awakeFromNib() {

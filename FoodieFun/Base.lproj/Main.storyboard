@@ -102,7 +102,7 @@
                                         <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoWhite" translatesAutoresizingMaskIntoConstraints="NO" id="4US-X7-ZcW">
-                                        <rect key="frame" x="0.0" y="40.5" width="374" height="80"/>
+                                        <rect key="frame" x="0.0" y="40.5" width="374" height="80.000000000000114"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="34b-5V-D8b"/>
                                         </constraints>
@@ -219,6 +219,7 @@
                                     <outlet property="itemNameLabel" destination="t2y-LT-VbG" id="gBB-4j-1BA"/>
                                     <outlet property="priceLabel" destination="R8Y-An-35z" id="vyl-uJ-G9e"/>
                                     <outlet property="restaurantName" destination="Q8O-rn-oKT" id="Qej-vq-gxz"/>
+                                    <segue destination="YRp-LI-gfn" kind="presentation" identifier="editExperienceSegue" id="u5q-2b-Yhb"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -471,7 +472,7 @@
                                         <rect key="frame" x="0.0" y="426.5" width="334" height="48"/>
                                         <color key="backgroundColor" red="0.90588235289999997" green="0.43529411759999997" blue="0.1450980392" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
-                                        <state key="normal" title="Add experience">
+                                        <state key="normal" title="Add">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -843,4 +844,7 @@
         <image name="magnifyingglass" catalog="system" width="64" height="60"/>
         <image name="profile" width="264" height="264"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="u5q-2b-Yhb"/>
+    </inferredMetricsTieBreakers>
 </document>

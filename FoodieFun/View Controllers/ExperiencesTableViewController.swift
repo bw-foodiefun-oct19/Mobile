@@ -86,6 +86,13 @@ class ExperiencesTableViewController: UITableViewController {
             if let searchVC = segue.destination as? SearchViewController {
                 searchVC.apiController = apiController
             }
+        } else if segue.identifier == "editExperienceSegue" {
+            if let experienceVC = segue.destination as? AddExperienceViewController, let indexPath = tableView.indexPathForSelectedRow {
+                let experience = fetchedResultsController.object(at: indexPath)
+                
+                experienceVC.experience = experience
+                experienceVC.apiController = apiController
+            }
         }
     }
     

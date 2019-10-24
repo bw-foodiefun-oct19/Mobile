@@ -20,17 +20,14 @@ class AddExperienceViewController: UIViewController, UITextFieldDelegate {
     
     var apiController: APIController?
     
-    var experience: Experience? {
-        didSet {
-            updateViews()
-        }
-    }
+    var experience: Experience?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setRestaurantName()
         detectTap()
         styleElements()
+        updateViews()
     }
     
     @IBAction func shareExperienceTapped(_ sender: Any) {
@@ -40,7 +37,8 @@ class AddExperienceViewController: UIViewController, UITextFieldDelegate {
             !itemName.isEmpty else { return }
         
         if let experience = experience {
-            print("to be updated")
+            
+            apiController?.updateExperience(experience: experience, itemName: itemName, restaurantName: restaurantName, restaurantType: cuisineTypeTextField.text ?? "", itemPhoto: "", foodRating: Int.random(in: 1...5), itemComment: reviewTextView.text ?? "", waitTime: "", dateVisited: Date())
         } else {
             apiController?.createExperience(itemName: itemName, restaurantName: restaurantName, restaurantType: cuisineTypeTextField.text ?? "", itemPhoto: "", foodRating: Int.random(in: 1...5), itemComment: reviewTextView.text, waitTime: "", dateVisited: Date())
         }
@@ -64,10 +62,14 @@ class AddExperienceViewController: UIViewController, UITextFieldDelegate {
     }
     
     func updateViews() {
-        restaurantNameTextField.text = experience?.restaurantName
-        menuItemTextField.text = experience?.itemName
-        cuisineTypeTextField.text = experience?.restaurantType
-        reviewTextView.text = experience?.itemComment
+        if let experience = experience {
+            experienceLabel.text = "Edit Experience"
+            shareExperienceButton.setTitle("Update", for: .normal)
+            restaurantNameTextField.text = experience.restaurantName
+            menuItemTextField.text = experience.itemName
+            cuisineTypeTextField.text = experience.restaurantType
+            reviewTextView.text = experience.itemComment
+        }
     }
     
 }

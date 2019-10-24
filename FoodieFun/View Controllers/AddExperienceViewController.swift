@@ -45,7 +45,6 @@ class AddExperienceViewController: UIViewController, UITextFieldDelegate {
             apiController?.createExperience(itemName: itemName, restaurantName: restaurantName, restaurantType: cuisineTypeTextField.text ?? "", itemPhoto: "", foodRating: Int.random(in: 1...5), itemComment: reviewTextView.text, waitTime: "", dateVisited: Date())
         }
         navigationController?.popToRootViewController(animated: true)
-        
     }
     
     func setRestaurantName() {
@@ -65,8 +64,10 @@ class AddExperienceViewController: UIViewController, UITextFieldDelegate {
     }
     
     func updateViews() {
-        
-        
+        restaurantNameTextField.text = experience?.restaurantName
+        menuItemTextField.text = experience?.itemName
+        cuisineTypeTextField.text = experience?.restaurantType
+        reviewTextView.text = experience?.itemComment
     }
     
 }

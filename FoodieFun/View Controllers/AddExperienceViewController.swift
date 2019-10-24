@@ -35,18 +35,16 @@ class AddExperienceViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func shareExperienceTapped(_ sender: Any) {
         guard let restaurantName = restaurantNameTextField.text,
-            let menuItem = menuItemTextField.text,
+            let itemName = menuItemTextField.text,
             !restaurantName.isEmpty,
-            !menuItem.isEmpty else { return }
+            !itemName.isEmpty else { return }
         
-        let _ = Experience(restaurantName: restaurantName, restaurantType: cuisineTypeTextField.text ?? "", itemName: menuItem, itemPhoto: "", foodRating: 0, itemComment: reviewTextView.text, waitTime: "", dateVisited: Date(), context: CoreDataStack.shared.mainContext)
-        
-        do {
-            let moc = CoreDataStack.shared.mainContext
-            try moc.save()
-        } catch {
-            print("Error saving managed object context: \(error)")
+        if let experience = experience {
+            print("to be updated")
+        } else {
+            apiController?.createExperience(itemName: itemName, restaurantName: restaurantName, restaurantType: cuisineTypeTextField.text ?? "", itemPhoto: "", foodRating: Int.random(in: 1...5), itemComment: reviewTextView.text, waitTime: "", dateVisited: Date())
         }
+        navigationController?.popToRootViewController(animated: true)
         
     }
     

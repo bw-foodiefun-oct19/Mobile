@@ -9,14 +9,14 @@
 import Foundation
 
 struct ExperienceRepresentation: Equatable, Codable {
-    var id: Int
-    var restaurantName: String
-    var restaurantType: String
+    var id: Int?
+    var restaurantName: String?
+    var restaurantType: String?
     var itemName: String
-    var itemPhoto: String
-    var foodRating: Int
-    var itemComment: String
-    var waitTime: String
+    var itemPhoto: String?
+    var foodRating: Int?
+    var itemComment: String?
+    var waitTime: String?
     var dateVisited: Date
     var userID: Int
 }

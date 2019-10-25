@@ -14,7 +14,6 @@
 		0B7BB5882357EBCC00B8958B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B7BB5862357EBCC00B8958B /* LaunchScreen.storyboard */; };
 		292C11B423613F0100748EB9 /* ExperienceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 292C11B323613F0100748EB9 /* ExperienceTableViewCell.swift */; };
 		29CB63652359648B003D56DC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CB63642359648B003D56DC /* User.swift */; };
-		29CB6367235964B3003D56DC /* Experience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CB6366235964B3003D56DC /* Experience.swift */; };
 		29CB6369235967C6003D56DC /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CB6368235967C6003D56DC /* SignUpViewController.swift */; };
 		29CB636C23596823003D56DC /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CB636B23596823003D56DC /* APIController.swift */; };
 		29CB636E235968BA003D56DC /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29CB636D235968BA003D56DC /* Token.swift */; };
@@ -39,7 +38,6 @@
 		0B7BB5892357EBCC00B8958B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		292C11B323613F0100748EB9 /* ExperienceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExperienceTableViewCell.swift; sourceTree = "<group>"; };
 		29CB63642359648B003D56DC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		29CB6366235964B3003D56DC /* Experience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experience.swift; sourceTree = "<group>"; };
 		29CB6368235967C6003D56DC /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		29CB636B23596823003D56DC /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		29CB636D235968BA003D56DC /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -111,7 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				29CB63642359648B003D56DC /* User.swift */,
-				29CB6366235964B3003D56DC /* Experience.swift */,
 				29CB636D235968BA003D56DC /* Token.swift */,
 				CCB15A46235B6B5C000F3A55 /* FoodieFun.xcdatamodeld */,
 				CCEB9218235FDE360072ACBA /* ExperienceRepresentation.swift */,
@@ -232,7 +229,6 @@
 				0B7BB57C2357EBCB00B8958B /* AppDelegate.swift in Sources */,
 				CCA5759B235A169C004F17BA /* SignInViewController.swift in Sources */,
 				CCB15A45235B6B18000F3A55 /* CoreDataStack.swift in Sources */,
-				29CB6367235964B3003D56DC /* Experience.swift in Sources */,
 				0B7BB57E2357EBCB00B8958B /* SceneDelegate.swift in Sources */,
 				CCB15A48235B6B5C000F3A55 /* FoodieFun.xcdatamodeld in Sources */,
 				29CB636E235968BA003D56DC /* Token.swift in Sources */,

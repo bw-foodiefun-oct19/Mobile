@@ -13,10 +13,33 @@ extension Experience {
     
     var experienceRepresentation: ExperienceRepresentation? {
         guard let itemName = itemName else { return nil }
-        return ExperienceRepresentation(id: Int(id), restaurantName: restaurantName ?? "", restaurantType: restaurantType ?? "", itemName: itemName, itemPhoto: itemPhoto ?? "", foodRating: Int(foodRating), itemComment: itemComment ?? "", waitTime: waitTime ?? "", dateVisited: Date(), userID: Int(userID))
+        
+        let dateFormatter = DateFormatter()
+        let dateString = dateFormatter.string(from: Date())
+        
+        return ExperienceRepresentation(id: Int(id),
+                                        restaurantName: restaurantName ?? "",
+                                        restaurantType: restaurantType ?? "",
+                                        itemName: itemName,
+                                        itemPhoto: itemPhoto ?? "",
+                                        foodRating: Int(foodRating),
+                                        itemComment: itemComment ?? "",
+                                        waitTime: waitTime ?? "",
+                                        dateVisited: dateString,
+                                        userID: Int(userID))
     }
     
-    convenience init(restaurantName: String?, restaurantType: String?, itemName: String, itemPhoto: String?, foodRating: Int?, itemComment: String?, waitTime: String?, dateVisited: Date = Date(), context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+    convenience init(id: Int? = nil,
+                     userID: Int? = nil,
+                     restaurantName: String?,
+                     restaurantType: String?,
+                     itemName: String,
+                     itemPhoto: String?,
+                     foodRating: Int?,
+                     itemComment: String?,
+                     waitTime: String?,
+                     dateVisited: String?,
+                     context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         
         self.restaurantName = restaurantName

@@ -101,13 +101,13 @@ class APIController {
             
             if let response = response as? HTTPURLResponse,
                 response.statusCode != 200 {
-                let statusCodeError = NSError(domain: "com.JohnKouris.AnimalSpotter", code: response.statusCode, userInfo: nil)
+                let statusCodeError = NSError(domain: "com.LambdaSchool.FoodieFun2", code: response.statusCode, userInfo: nil)
                 completion(statusCodeError)
             }
             
             guard let data = data else {
                 NSLog("No data returned from data task")
-                let noDataError = NSError(domain: "com.JohnKouris.AnimalSpotter", code: -1, userInfo: nil)
+                let noDataError = NSError(domain: "com.LambdaSchool.FoodieFun2", code: -1, userInfo: nil)
                 completion(noDataError)
                 return
             }
@@ -125,8 +125,25 @@ class APIController {
         }.resume()
     }
     
-    @discardableResult func createExperience(itemName: String, restaurantName: String?, restaurantType: String?, itemPhoto: String?, foodRating: Int?, itemComment: String?, waitTime: String?, dateVisited: Date = Date()) -> Experience {
-        let experience = Experience(restaurantName: restaurantName, restaurantType: restaurantType, itemName: itemName, itemPhoto: itemPhoto, foodRating: foodRating, itemComment: itemComment, waitTime: waitTime, dateVisited: dateVisited, context: CoreDataStack.shared.mainContext)
+    @discardableResult func createExperience(id: Int? = nil,
+                                             userID: Int? = nil,
+                                             itemName: String,
+                                             restaurantName: String?,
+                                             restaurantType: String?,
+                                             itemPhoto: String?,
+                                             foodRating: Int?,
+                                             itemComment: String?,
+                                             waitTime: String?,
+                                             dateVisited: String?) -> Experience {
+        let experience = Experience(restaurantName: restaurantName,
+                                    restaurantType: restaurantType,
+                                    itemName: itemName,
+                                    itemPhoto: itemPhoto,
+                                    foodRating: foodRating,
+                                    itemComment: itemComment,
+                                    waitTime: waitTime,
+                                    dateVisited: dateVisited,
+                                    context: CoreDataStack.shared.mainContext)
         post(experience: experience)
         CoreDataStack.shared.save()
         return experience
@@ -169,7 +186,7 @@ class APIController {
             
             do {
                 let decoder = JSONDecoder()
-                let experienceRepresentations = try decoder.decode([String: ExperienceRepresentation].self, from: data).map({ $0.value })
+                let experienceRepresentations = try decoder.decode([ExperienceRepresentation].self, from: data)
                 self.updateExperiences(with: experienceRepresentations)
             } catch {
                 NSLog("Error decoding experience objects: \(error)")
@@ -179,7 +196,15 @@ class APIController {
         }.resume()
     }
     
-    func updateExperience(experience: Experience, itemName: String, restaurantName: String?, restaurantType: String?, itemPhoto: String?, foodRating: Int?, itemComment: String?, waitTime: String?, dateVisited: Date = Date()) {
+    func updateExperience(experience: Experience,
+                          itemName: String,
+                          restaurantName: String?,
+                          restaurantType: String?,
+                          itemPhoto: String?,
+                          foodRating: Int?,
+                          itemComment: String?,
+                          waitTime: String?,
+                          dateVisited: String?) {
         experience.itemName = itemName
         experience.restaurantName = restaurantName
         experience.restaurantType = restaurantType
@@ -234,18 +259,18 @@ class APIController {
     }
     
     func post(experience: Experience, completion: @escaping () -> Void = {}) {
-        let identifier = experience.id
-        experience.id = identifier
-        
         guard let token = self.token else {
             completion()
             return
         }
         
-        let requestURL = baseURL.appendingPathComponent("meals").appendingPathComponent("\(identifier)")
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        
+        let requestURL = baseURL.appendingPathComponent("meals")
         var request = URLRequest(url: requestURL)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(token.token, forHTTPHeaderField: "Authorization")
+        request.setValue(token.token, forHTTPHeaderField: "Authorization")
         request.httpMethod = HTTPMethod.post.rawValue
         
         guard let experienceRepresentation = experience.experienceRepresentation else {
@@ -255,7 +280,7 @@ class APIController {
         }
         
         do {
-            request.httpBody = try JSONEncoder().encode(experienceRepresentation)
+            request.httpBody = try encoder.encode(experienceRepresentation)
         } catch {
             print("Error encoding experience representation: \(error)")
             completion()
@@ -264,7 +289,7 @@ class APIController {
         
         URLSession.shared.dataTask(with: request) { (_, _, error) in
             if let error = error {
-                print("Error PUTing experience: \(error)")
+                print("Error POSTing experience: \(error)")
                 completion()
                 return
             }

@@ -16,9 +16,6 @@ class ExperienceTableViewCell: UITableViewCell {
     @IBOutlet var itemNameLabel: UILabel!
     @IBOutlet var ratingLabel: UILabel!
     
-    let dateFormatter = DateFormatter()
-    
-    
     var experience: Experience? {
         didSet {
             updateViews()
@@ -27,10 +24,8 @@ class ExperienceTableViewCell: UITableViewCell {
     
     func updateViews() {
         restaurantName.text = experience?.restaurantName
-        dateFormatter.dateFormat = "MM-dd-yyy"
         itemNameLabel.text = experience?.itemName
-        let dateVisited = dateFormatter.string(from: experience?.dateVisited ?? Date())
-        dateVisitedLabel.text = dateVisited
+        dateVisitedLabel.text = experience?.dateVisited
         if let rating = experience?.foodRating {
             ratingLabel.text = "Rating: \(rating)"
         }

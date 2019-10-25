@@ -17,7 +17,7 @@ struct ExperienceRepresentation: Equatable, Codable {
     var foodRating: Int?
     var itemComment: String?
     var waitTime: String?
-    var dateVisited: Date
+    var dateVisited: String?
     var userID: Int
 }
 

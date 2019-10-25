@@ -29,7 +29,6 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpButtonTapped(_ sender: Any) {
-        
         guard let username = emailTextField.text,
             let password = passwordTextField.text,
             let confirmPassword = confirmPasswordTextField.text,
@@ -56,8 +55,9 @@ class SignUpViewController: UIViewController {
         let user = User(username: username, password: password)
         
         signUp(with: user)
+        
+//        dismiss(animated: true, completion: nil)
     }
-    
     
     func signUp(with user: User) {
         apiController.signUp(with: user, completion: { (error) in
@@ -65,10 +65,20 @@ class SignUpViewController: UIViewController {
                 print("Error signing up: \(error)")
             } else {
                 DispatchQueue.main.async {
-                    self.dismiss(animated: true, completion: nil)
+                    let ac = UIAlertController(title: "Sign up successful!", message: "Your sign up was successful. Now please sign in.", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                        self.dismiss(animated: true, completion: nil)
+                    }))
+                    self.present(ac, animated: true, completion: nil)
                 }
+                
             }
+            
         })
+        
+        
+        
+        
     }
     
 

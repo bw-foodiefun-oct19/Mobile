@@ -48,7 +48,6 @@ class AddExperienceViewController: UIViewController, UITextFieldDelegate {
                                             waitTime: "",
                                             dateVisited: experience.dateVisited)
         } else {
-            
             let dateFormatter = DateFormatter()
             experience?.dateVisited = dateFormatter.string(from: Date())
             apiController?.createExperience(itemName: itemName,
@@ -60,7 +59,7 @@ class AddExperienceViewController: UIViewController, UITextFieldDelegate {
                                             waitTime: "",
                                             dateVisited: experience?.dateVisited)
         }
-        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
     }
     
     func setRestaurantName() {

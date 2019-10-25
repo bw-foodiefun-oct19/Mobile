@@ -17,4 +17,7 @@ struct Meal: Codable, Equatable {
     let itemComment: String?
     let dateVisited: String?
     let userId: Int?
+    
 }
+
+

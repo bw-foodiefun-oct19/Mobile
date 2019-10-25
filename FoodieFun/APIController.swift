@@ -30,12 +30,12 @@ class APIController {
     var bearerSignIn: BearerSignIn?
     
     private let baseUrl = URL(string: "https://backend-foodie-fun.herokuapp.com/api/")!
-
+    
     
     //Sign up - POST
     func signUp(with user: User, completion: @escaping (Error?)-> Void) {
         let signUpURL = baseUrl.appendingPathComponent("auth/register")
-    
+        
         
         var request = URLRequest(url: signUpURL)
         request.httpMethod = HTTPMethod.post.rawValue
@@ -66,7 +66,7 @@ class APIController {
             
             completion(nil)
             print("passed sign up")
-            }.resume()
+        }.resume()
     }
     
     //SignIn - POST  - requried fields -> username, password
@@ -120,7 +120,7 @@ class APIController {
                 completion(error)
                 return
             }
-            }.resume()
+        }.resume()
     }
     
     //FetchingMeals - GET - requried fields -> username, password and token
@@ -164,36 +164,47 @@ class APIController {
                 let allMeals = try jsonDecoder.decode([Meal].self, from: data)
                 
                 /*
-                it seems like backend is not designed to combine all experiences (meals) from all users
-                myMeals for each user
-                let userID = self.bearer?.id
-                let myMeals = fitnessClasses.filter{$0.id == userID}
-                self.meals = myMeals
-                */
+                 it seems like backend is not designed to combine all experiences (meals) from all users
+                 myMeals for each user
+                 let userID = self.bearer?.id
+                 let myMeals = fitnessClasses.filter{$0.id == userID}
+                 self.meals = myMeals
+                 */
                 
                 //all meals from all users
                 self.allMeals = allMeals
- 
+                
                 completion(nil)
             } catch {
                 NSLog("Error decoding meals objects: \(error)")
                 completion(error)
                 return
             }
-            }.resume()
+        }.resume()
     }
     
     //Creating Meals - POST - requried fields -> item_name
     func createMeal(for itemName: String, restaurantName: String, itemPhoto: String?, foodRating: Int?, comment: String, completion:@escaping(Error?)->()) {
-    
-        //dateFormatter for dateVisited
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        let myString = formatter.string(from: Date())
-        let yourDate = formatter.date(from: myString)
-        let myStringfd = formatter.string(from: yourDate!)
         
-        let meal = Meal(id: nil, restaurantName: restaurantName, itemName: itemName, itemPhoto: nil, foodRating: foodRating, itemComment: comment, dateVisited: myStringfd, userId: nil)
+        //dateFormatter for dateVisited
+        //        let formatter = DateFormatter()
+        //        formatter.dateStyle = .medium
+        //        formatter.timeStyle = .none
+        //
+        //        formatter.locale = Locale(identifier: "en_US")
+        //        let dateString = formatter.string(from: Date())
+        //        print(dateString)
+        
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone.local
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        
+        let dateString = dateFormatter.string(from: Date())
+        print(dateString)
+        
+        
+        let meal = Meal(id: nil, restaurantName: restaurantName, itemName: itemName, itemPhoto: nil, foodRating: foodRating, itemComment: comment, dateVisited: dateString, userId: nil)
         
         //POST
         let createMealURL = self.baseUrl.appendingPathComponent("meals")
@@ -233,7 +244,7 @@ class APIController {
             }
             self.allMeals.append(meal)
             completion(nil)
-            }.resume()
+        }.resume()
     }
     
     //Updating meals - PUT - meals/id# for this specifi meal
@@ -242,8 +253,8 @@ class APIController {
         //making sure passed meal exists in array of allMeals
         guard let index = self.allMeals.firstIndex(of: meal) else {return}
         self.allMeals[index].itemName = changeitemNameto
-//        self.allMeals[index].restaurantName = changerestaurantNameto!
-//        self.allMeals[index].restaurantType = changerestaurantTypeto!
+        //        self.allMeals[index].restaurantName = changerestaurantNameto!
+        //        self.allMeals[index].restaurantType = changerestaurantTypeto!
         //add more change update as needed
         
         //let updatedClass = fitnessClasses[index]
@@ -253,10 +264,10 @@ class APIController {
         let updateMealURL = self.baseUrl.appendingPathComponent("meals/\(mealID)")
         
         //creating its own json file for name change
- 
+        
         let params = ["item_name": changeitemNameto, "restaurant_name": changerestaurantNameto, "food_rating": changefoodRatingto ?? 0, "item_comment": changeitemCommentto] as [String: Any]
         let json = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-   
+        
         
         guard let bearer = self.bearerSignIn else {
             completion(NSError())
@@ -270,7 +281,7 @@ class APIController {
         
         //request httpBody of our own json format
         request.httpBody = json
-
+        
         URLSession.shared.dataTask(with: request) { (_, response, error) in
             if let response = response as? HTTPURLResponse,
                 response.statusCode != 200 {
@@ -284,7 +295,7 @@ class APIController {
                 return
             }
             completion(nil)
-            }.resume()
+        }.resume()
     }
     
     //Delete
@@ -293,7 +304,7 @@ class APIController {
         //Delete locally
         guard let index = self.allMeals.firstIndex(of: meal) else {return}
         self.allMeals.remove(at: index)
-    
+        
         guard let mealID =  meal.id else {return}
         
         let deleteMealURL = baseUrl.appendingPathComponent("meals/\(mealID)")

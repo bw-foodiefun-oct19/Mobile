@@ -25,7 +25,6 @@ class DetailMealViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateViews()
-        // Do any additional setup after loading the view.
     }
     
     
@@ -47,7 +46,6 @@ class DetailMealViewController: UIViewController {
         self.commentTextField?.text = meal.itemComment
     }
     
-    
     @IBAction func saveMealButtonTapped(_ sender: Any) {
         guard let itemname = self.itemnameTextField.text,
             let restaurantName = self.restaurantNameTextField.text,
@@ -58,6 +56,7 @@ class DetailMealViewController: UIViewController {
                 
                 return
         }
+        
         
         if let meal = self.meal {
             self.apiController.updateMeal(for: meal, changeitemNameto: itemname, changerestaurantNameto: restaurantName, changeitemPhototo: "", changefoodRatingto: Int(foodRating), changeitemCommentto: comment ) { (error) in

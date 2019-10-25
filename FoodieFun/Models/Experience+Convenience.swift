@@ -13,10 +13,27 @@ extension Experience {
     
     var experienceRepresentation: ExperienceRepresentation? {
         guard let itemName = itemName else { return nil }
-        return ExperienceRepresentation(id: Int(id), restaurantName: restaurantName ?? "", restaurantType: restaurantType ?? "", itemName: itemName, itemPhoto: itemPhoto ?? "", foodRating: Int(foodRating), itemComment: itemComment ?? "", waitTime: waitTime ?? "", dateVisited: Date(), userID: Int(userID))
+        return ExperienceRepresentation(id: Int(id),
+                                        restaurantName: restaurantName ?? "",
+                                        restaurantType: restaurantType ?? "",
+                                        itemName: itemName,
+                                        itemPhoto: itemPhoto ?? "",
+                                        foodRating: Int(foodRating),
+                                        itemComment: itemComment ?? "",
+                                        waitTime: waitTime ?? "",
+                                        dateVisited: Date(),
+                                        userID: Int(userID))
     }
     
-    convenience init(restaurantName: String?, restaurantType: String?, itemName: String, itemPhoto: String?, foodRating: Int?, itemComment: String?, waitTime: String?, dateVisited: Date = Date(), context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+    convenience init(restaurantName: String?,
+                     restaurantType: String?,
+                     itemName: String,
+                     itemPhoto: String?,
+                     foodRating: Int?,
+                     itemComment: String?,
+                     waitTime: String?,
+                     dateVisited: Date = Date(),
+                     context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         
         self.restaurantName = restaurantName

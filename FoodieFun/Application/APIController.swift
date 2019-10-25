@@ -125,8 +125,23 @@ class APIController {
         }.resume()
     }
     
-    @discardableResult func createExperience(itemName: String, restaurantName: String?, restaurantType: String?, itemPhoto: String?, foodRating: Int?, itemComment: String?, waitTime: String?, dateVisited: Date = Date()) -> Experience {
-        let experience = Experience(restaurantName: restaurantName, restaurantType: restaurantType, itemName: itemName, itemPhoto: itemPhoto, foodRating: foodRating, itemComment: itemComment, waitTime: waitTime, dateVisited: dateVisited, context: CoreDataStack.shared.mainContext)
+    @discardableResult func createExperience(itemName: String,
+                                             restaurantName: String?,
+                                             restaurantType: String?,
+                                             itemPhoto: String?,
+                                             foodRating: Int?,
+                                             itemComment: String?,
+                                             waitTime: String?,
+                                             dateVisited: Date = Date()) -> Experience {
+        let experience = Experience(restaurantName: restaurantName,
+                                    restaurantType: restaurantType,
+                                    itemName: itemName,
+                                    itemPhoto: itemPhoto,
+                                    foodRating: foodRating,
+                                    itemComment: itemComment,
+                                    waitTime: waitTime,
+                                    dateVisited: dateVisited,
+                                    context: CoreDataStack.shared.mainContext)
         post(experience: experience)
         CoreDataStack.shared.save()
         return experience
@@ -179,7 +194,15 @@ class APIController {
         }.resume()
     }
     
-    func updateExperience(experience: Experience, itemName: String, restaurantName: String?, restaurantType: String?, itemPhoto: String?, foodRating: Int?, itemComment: String?, waitTime: String?, dateVisited: Date = Date()) {
+    func updateExperience(experience: Experience,
+                          itemName: String,
+                          restaurantName: String?,
+                          restaurantType: String?,
+                          itemPhoto: String?,
+                          foodRating: Int?,
+                          itemComment: String?,
+                          waitTime: String?,
+                          dateVisited: Date = Date()) {
         experience.itemName = itemName
         experience.restaurantName = restaurantName
         experience.restaurantType = restaurantType

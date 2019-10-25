@@ -101,13 +101,13 @@ class APIController {
             
             if let response = response as? HTTPURLResponse,
                 response.statusCode != 200 {
-                let statusCodeError = NSError(domain: "com.JohnKouris.AnimalSpotter", code: response.statusCode, userInfo: nil)
+                let statusCodeError = NSError(domain: "com.LambdaSchool.FoodieFun2", code: response.statusCode, userInfo: nil)
                 completion(statusCodeError)
             }
             
             guard let data = data else {
                 NSLog("No data returned from data task")
-                let noDataError = NSError(domain: "com.JohnKouris.AnimalSpotter", code: -1, userInfo: nil)
+                let noDataError = NSError(domain: "com.LambdaSchool.FoodieFun2", code: -1, userInfo: nil)
                 completion(noDataError)
                 return
             }

@@ -44,8 +44,6 @@ class ExperiencesTableViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        
     }
 
     // MARK: - Table view data source
@@ -142,7 +140,6 @@ extension ExperiencesTableViewController: NSFetchedResultsControllerDelegate {
             guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.insertRows(at: [newIndexPath], with: .automatic)
-//            tableView.moveRow(at: indexPath, to: newIndexPath)
         case .update:
             guard let indexPath = indexPath else { return }
             tableView.reloadRows(at: [indexPath], with: .automatic)

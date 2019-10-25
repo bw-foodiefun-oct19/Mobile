@@ -38,9 +38,27 @@ class AddExperienceViewController: UIViewController, UITextFieldDelegate {
             !itemName.isEmpty else { return }
         
         if let experience = experience {
-            apiController?.updateExperience(experience: experience, itemName: itemName, restaurantName: restaurantName, restaurantType: cuisineTypeTextField.text ?? "", itemPhoto: "", foodRating: Int(ratingLabel.text ?? "1"), itemComment: reviewTextView.text ?? "", waitTime: "", dateVisited: Date())
+            apiController?.updateExperience(experience: experience,
+                                            itemName: itemName,
+                                            restaurantName: restaurantName,
+                                            restaurantType: cuisineTypeTextField.text ?? "",
+                                            itemPhoto: "",
+                                            foodRating: Int(ratingLabel.text ?? "1"),
+                                            itemComment: reviewTextView.text ?? "",
+                                            waitTime: "",
+                                            dateVisited: experience.dateVisited)
         } else {
-            apiController?.createExperience(itemName: itemName, restaurantName: restaurantName, restaurantType: cuisineTypeTextField.text ?? "", itemPhoto: "", foodRating: Int(ratingLabel.text ?? "1"), itemComment: reviewTextView.text, waitTime: "", dateVisited: Date())
+            
+            let dateFormatter = DateFormatter()
+            experience?.dateVisited = dateFormatter.string(from: Date())
+            apiController?.createExperience(itemName: itemName,
+                                            restaurantName: restaurantName,
+                                            restaurantType: cuisineTypeTextField.text ?? "",
+                                            itemPhoto: "",
+                                            foodRating: Int(ratingLabel.text ?? "1"),
+                                            itemComment: reviewTextView.text,
+                                            waitTime: "",
+                                            dateVisited: experience?.dateVisited)
         }
         navigationController?.popToRootViewController(animated: true)
     }

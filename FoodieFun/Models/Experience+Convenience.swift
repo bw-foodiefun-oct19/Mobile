@@ -13,6 +13,10 @@ extension Experience {
     
     var experienceRepresentation: ExperienceRepresentation? {
         guard let itemName = itemName else { return nil }
+        
+        let dateFormatter = DateFormatter()
+        let dateString = dateFormatter.string(from: Date())
+        
         return ExperienceRepresentation(id: Int(id),
                                         restaurantName: restaurantName ?? "",
                                         restaurantType: restaurantType ?? "",
@@ -21,7 +25,7 @@ extension Experience {
                                         foodRating: Int(foodRating),
                                         itemComment: itemComment ?? "",
                                         waitTime: waitTime ?? "",
-                                        dateVisited: Date(),
+                                        dateVisited: dateString,
                                         userID: Int(userID))
     }
     
@@ -32,7 +36,7 @@ extension Experience {
                      foodRating: Int?,
                      itemComment: String?,
                      waitTime: String?,
-                     dateVisited: Date = Date(),
+                     dateVisited: String?,
                      context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         self.init(context: context)
         

@@ -132,7 +132,7 @@ class APIController {
                                              foodRating: Int?,
                                              itemComment: String?,
                                              waitTime: String?,
-                                             dateVisited: Date = Date()) -> Experience {
+                                             dateVisited: String?) -> Experience {
         let experience = Experience(restaurantName: restaurantName,
                                     restaurantType: restaurantType,
                                     itemName: itemName,
@@ -184,7 +184,7 @@ class APIController {
             
             do {
                 let decoder = JSONDecoder()
-                let experienceRepresentations = try decoder.decode([String: ExperienceRepresentation].self, from: data).map({ $0.value })
+                let experienceRepresentations = try decoder.decode([ExperienceRepresentation].self, from: data)
                 self.updateExperiences(with: experienceRepresentations)
             } catch {
                 NSLog("Error decoding experience objects: \(error)")
@@ -202,7 +202,7 @@ class APIController {
                           foodRating: Int?,
                           itemComment: String?,
                           waitTime: String?,
-                          dateVisited: Date = Date()) {
+                          dateVisited: String?) {
         experience.itemName = itemName
         experience.restaurantName = restaurantName
         experience.restaurantType = restaurantType

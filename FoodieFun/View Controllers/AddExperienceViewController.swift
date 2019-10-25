@@ -60,7 +60,7 @@ class AddExperienceViewController: UIViewController, UITextFieldDelegate {
                                             waitTime: "",
                                             dateVisited: experience?.dateVisited)
         }
-        navigationController?.popToRootViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     func setRestaurantName() {

@@ -29,7 +29,9 @@ extension Experience {
                                         userID: Int(userID))
     }
     
-    convenience init(restaurantName: String?,
+    convenience init(id: Int? = nil,
+                     userID: Int? = nil,
+                     restaurantName: String?,
                      restaurantType: String?,
                      itemName: String,
                      itemPhoto: String?,

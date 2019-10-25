@@ -125,7 +125,9 @@ class APIController {
         }.resume()
     }
     
-    @discardableResult func createExperience(itemName: String,
+    @discardableResult func createExperience(id: Int? = nil,
+                                             userID: Int? = nil,
+                                             itemName: String,
                                              restaurantName: String?,
                                              restaurantType: String?,
                                              itemPhoto: String?,
@@ -257,18 +259,18 @@ class APIController {
     }
     
     func post(experience: Experience, completion: @escaping () -> Void = {}) {
-        let identifier = experience.id
-        experience.id = identifier
-        
         guard let token = self.token else {
             completion()
             return
         }
         
-        let requestURL = baseURL.appendingPathComponent("meals").appendingPathComponent("\(identifier)")
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        
+        let requestURL = baseURL.appendingPathComponent("meals")
         var request = URLRequest(url: requestURL)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(token.token, forHTTPHeaderField: "Authorization")
+        request.setValue(token.token, forHTTPHeaderField: "Authorization")
         request.httpMethod = HTTPMethod.post.rawValue
         
         guard let experienceRepresentation = experience.experienceRepresentation else {
@@ -278,7 +280,7 @@ class APIController {
         }
         
         do {
-            request.httpBody = try JSONEncoder().encode(experienceRepresentation)
+            request.httpBody = try encoder.encode(experienceRepresentation)
         } catch {
             print("Error encoding experience representation: \(error)")
             completion()
@@ -287,7 +289,7 @@ class APIController {
         
         URLSession.shared.dataTask(with: request) { (_, _, error) in
             if let error = error {
-                print("Error PUTing experience: \(error)")
+                print("Error POSTing experience: \(error)")
                 completion()
                 return
             }

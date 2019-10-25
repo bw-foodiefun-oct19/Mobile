@@ -12,7 +12,7 @@ import CoreData
 class ExperiencesTableViewController: UITableViewController {
     
     let apiController = APIController()
-    let images = ["eggsBG", "fishBG", "hummusBG", "kebabBG", "mealBG", "pitaBG", "pizzaBG", "saladBG", "steakBG", "toastBG", "tritipBG", "twoSaladsBG"]
+    let images = ["eggsBG", "fishBG", "hummusBG", "kebabBG", "mealBG", "pitaBG", "pizzaBG", "saladBG", "steakBG", "toastBG", "twoSaladsBG"]
     
     lazy var fetchedResultsController: NSFetchedResultsController<Experience> = {
         let fetchRequest: NSFetchRequest<Experience> = Experience.fetchRequest()
@@ -32,6 +32,9 @@ class ExperiencesTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if apiController.token == nil {
+            performSegue(withIdentifier: "SignInViewModalSegue", sender: self)
+        }
         tableView.reloadData()
     }
 
@@ -42,9 +45,7 @@ class ExperiencesTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if apiController.token == nil {
-            performSegue(withIdentifier: "SignInViewModalSegue", sender: self)
-        }
+        
     }
 
     // MARK: - Table view data source

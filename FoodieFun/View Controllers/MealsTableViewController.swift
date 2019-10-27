@@ -22,7 +22,8 @@ class MealsTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if apiController.bearerSignIn?.token == nil {
+        
+        if self.apiController.tokenFromUserDefaults == nil && self.apiController.token == nil {
             performSegue(withIdentifier: "ToSignInView", sender: self)
         } else {
             self.apiController.fetchMeals { (error) in

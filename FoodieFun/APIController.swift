@@ -27,7 +27,8 @@ class APIController {
     
     var allMeals: [Meal] = []
     
-    var bearerSignIn: BearerSignIn?
+    var token: String?
+    let tokenFromUserDefaults = UserDefaults.standard.string(forKey: .saveToken)
     
     private let baseUrl = URL(string: "https://backend-foodie-fun.herokuapp.com/api/")!
     
@@ -111,8 +112,14 @@ class APIController {
             
             do {
                 let bearerSignIn = try jsonDecoder.decode(BearerSignIn.self, from: data)
-                self.bearerSignIn = bearerSignIn
-                print(self.bearerSignIn!)
+                self.token = bearerSignIn.token
+                
+                let userDefaults = UserDefaults.standard
+                //this saves token into bearerSignIn
+                userDefaults.set(self.token, forKey: .saveToken)
+                
+                
+                print(self.token!)
                 completion(nil)
                 
             } catch {
@@ -126,10 +133,15 @@ class APIController {
     //FetchingMeals - GET - requried fields -> username, password and token
     func fetchMeals(completion: @escaping (Error?)-> Void) {
         
-        guard let bearer = bearerSignIn else {
-            print("there is no bearer for fetchingMeals")
+        if let tokenFromUserDefaults = self.tokenFromUserDefaults {
+            self.token = tokenFromUserDefaults
+        }
+        
+        guard let token = self.token else {
+            print("there is no token from initial login")
             return
         }
+    
         
         
         let instructorURL = baseUrl.appendingPathComponent("meals")
@@ -137,7 +149,7 @@ class APIController {
         var request = URLRequest(url: instructorURL)
         request.httpMethod = HTTPMethod.get.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(bearer.token, forHTTPHeaderField: "Authorization")
+        request.addValue(token, forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let response = response as? HTTPURLResponse,
@@ -209,7 +221,7 @@ class APIController {
         //POST
         let createMealURL = self.baseUrl.appendingPathComponent("meals")
         
-        guard let bearer = self.bearerSignIn else {
+        guard let token = self.token else {
             completion(NSError())
             return
         }
@@ -217,7 +229,7 @@ class APIController {
         var request = URLRequest(url: createMealURL)
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(bearer.token, forHTTPHeaderField: "Authorization")
+        request.addValue(token, forHTTPHeaderField: "Authorization")
         
         let jsonEncoder = JSONEncoder()
         
@@ -269,7 +281,7 @@ class APIController {
         let json = try! JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         
         
-        guard let bearer = self.bearerSignIn else {
+        guard let token = self.token else {
             completion(NSError())
             return
         }
@@ -277,7 +289,7 @@ class APIController {
         var request = URLRequest(url: updateMealURL)
         request.httpMethod = HTTPMethod.put.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(bearer.token, forHTTPHeaderField: "Authorization")
+        request.addValue(token, forHTTPHeaderField: "Authorization")
         
         //request httpBody of our own json format
         request.httpBody = json
@@ -310,7 +322,7 @@ class APIController {
         let deleteMealURL = baseUrl.appendingPathComponent("meals/\(mealID)")
         
         
-        guard let bearer = self.bearerSignIn else {
+        guard let token = self.token else {
             completion(NSError())
             return
         }
@@ -318,7 +330,7 @@ class APIController {
         var request = URLRequest(url: deleteMealURL)
         request.httpMethod = HTTPMethod.delete.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue(bearer.token, forHTTPHeaderField: "Authorization")
+        request.addValue(token, forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { (_, response, error) in
             
